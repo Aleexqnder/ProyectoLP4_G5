@@ -22,6 +22,6 @@ Route::get('/dashboard/empleados', [EmpleadoController::class, 'index'])->name('
 Route::get('/dashboard/clientes', [ClientesController::class, 'index'])->name('clientes.index');
 Route::get('/dashboard/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
 Route::get('/dashboard/personas', [PersonasController::class, 'index'])->name('personas.index');
-// // Ruta para Personas
+// Ruta para Personas
 
 require __DIR__.'/auth.php';
