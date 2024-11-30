@@ -35,6 +35,11 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión para la adm
   - `AdminLTE`: Para gestionar vistas administrativas con estilos predefinidos.  
   - `dotenv`: Para manejar variables de entorno de manera segura, como credenciales de base de datos y configuraciones sensibles.
 
+## Tecnologías Utilizadas
+- **MySQL**: Para la gestión de la base de datos.
+- **Node.js**: Para la implementación del servidor y las APIs.
+- **Express**: Framework para crear aplicaciones web en Node.js.
+- **Dotenv**: Para manejar variables de entorno de forma segura, permitiendo configurar credenciales y datos sensibles fuera del código fuente.
 
 ## Miembros del Equipo
 - **Jasson Alexander Suazo Molina**
@@ -43,9 +48,3 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión para la adm
 - **André Alessandro Lagos Cano** 
 - **Edwin Alexander Mejía Molina** 
 - **Kevin David Miguel Ávila** 
-
-## Tecnologías Utilizadas
-- **MySQL**: Para la gestión de la base de datos.
-- **Node.js**: Para la implementación del servidor y las APIs.
-- **Express**: Framework para crear aplicaciones web en Node.js.
-- **Dotenv**: Para manejar variables de entorno de forma segura, permitiendo configurar credenciales y datos sensibles fuera del código fuente.
