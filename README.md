@@ -37,12 +37,12 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión para la adm
 
 
 ## Miembros del Equipo
-- **Jasson Alexander Suazo Molina** - 20211020997
-- **Carlos Francisco Reyes López** - 20191004421
-- **Yenifer Michell Fuentes Servellón** - 20221001412
-- **André Alessandro Lagos Cano** - 20201003997
-- **Edwin Alexander Mejía Molina** - 20191002726
-- **Kevin David Miguel Ávila** - 20211001469
+- **Jasson Alexander Suazo Molina**
+- **Carlos Francisco Reyes López** 
+- **Yenifer Michell Fuentes Servellón** 
+- **André Alessandro Lagos Cano** 
+- **Edwin Alexander Mejía Molina** 
+- **Kevin David Miguel Ávila** 
 
 ## Tecnologías Utilizadas
 - **MySQL**: Para la gestión de la base de datos.
