@@ -347,7 +347,20 @@ return [
             ],
         ],
 
-        
+        [
+            'text' => 'Modulo Reparaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reparaciones',
+                    'route' => 'reparaciones.listar',
+                ],
+                [
+                    'text' => 'Vehiculos',
+                    'route' => 'usuarios.index',
+                ],
+            ],
+        ],
 
 
     ],
