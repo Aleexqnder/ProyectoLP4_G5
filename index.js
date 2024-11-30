@@ -575,31 +575,34 @@ app.get('/REPARACIONES', (req, res) => {
 
 // POST reparaciones
 app.post('/REPARACIONES', (req, res) => {
-    const { cod_vehiculo, descripcion, fecha_reparacion } = req.body;
+    const { cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
 
-    mysqlConnection.query("CALL INS_REPARACION (?,?,?)", [
-        cod_vehiculo, descripcion, fecha_reparacion
-    ], (err, rows, fields) => {
-        if (!err) {
-            res.status(201).json({
-                message: 'Reparación ingresada correctamente.'
-            });
-        } else {
-            console.log(err);
-            res.status(500).json({
-                message: 'Error al ingresar la reparación.',
-                error: err
-            });
+    mysqlConnection.query(
+        "CALL INS_REPARACION(?, ?, ?, ?)",
+        [cod_vehiculo, descripcion, fecha_reparacion, costo],
+        (err, rows, fields) => {
+            if (!err) {
+                res.status(201).json({
+                    message: 'Reparación ingresada correctamente.',
+                    data: rows[0], // Opcional: devuelve el resultado si lo necesitas
+                });
+            } else {
+                console.error('Error al ingresar la reparación:', err);
+                res.status(500).json({
+                    message: 'Error al ingresar la reparación.',
+                    error: err.sqlMessage || err.message,
+                });
+            }
         }
-    });
+    );
 });
 
 // PUT Reparaciones
 app.put('/REPARACIONES', (req, res) => {
-    const { cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion } = req.body;
+    const { cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
 
-    mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?)", [
-        cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion
+    mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?,?)", [
+        cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo
     ], (err, rows, fields) => {
         if (!err) {
             res.status(200).json({
