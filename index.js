@@ -249,22 +249,22 @@ app.post('/empleados', (req, res) => {
         CALL INS_PERSONA_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
-        empleado.NOMBRES,
-        empleado.APELLIDOS,
-        empleado.DNI,
-        empleado.TELEFONO,
-        empleado.DIRECCION,
-        empleado.FECHA_NACIMIENTO,
-        empleado.ESTADO_CIVIL,
-        empleado.GENERO,
-        empleado.NACIONALIDAD,
-        empleado.NOMBRE_USUARIO,
-        empleado.CONTRASENA,
-        empleado.EMAIL,
-        empleado.SALARIO,
-        empleado.PUESTO,
-        empleado.FECHA_CONTRATACION,
-        empleado.EDAD 
+        empleado['nombres'],
+        empleado['apellidos'],
+        empleado['dni'],
+        empleado['telefono'],
+        empleado['direccion'],
+        empleado['fecha_nacimiento'],
+        empleado['estado_civil'],
+        empleado['genero'],
+        empleado['nacionalidad'],
+        empleado['nombre_usuario'],
+        empleado['contrasena'],
+        empleado['email'],
+        empleado['salario'],
+        empleado['puesto'],
+        empleado['fecha_contratacion'],
+        empleado['edad']
     ], (err) => {
         if (!err) {
             res.status(201).send("Empleado ingresado correctamente.");

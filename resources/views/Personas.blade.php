@@ -15,40 +15,44 @@
 @stop
 
 @section('content')
-<div class="container-fluid">
+@section('content')
+<div class="container-fluid" style="width: 100%; height: 100%;">
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            <div class="card" style="margin: auto;">
                 <div class="card-header">
                     <h3 class="card-title">Listado de Personas</h3>
                 </div>
                 <div class="card-body">
-                    <table id="personas-table" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Cod Persona</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>DNI</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
-                                <th>Edad</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Estado Civil</th>
-                                <th>Género</th>
-                                <th>Nacionalidad</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Las filas se llenarán dinámicamente con JavaScript -->
-                        </tbody>
-                    </table>
+                    <!-- Contenedor para hacer la tabla desplazable -->
+                    <div style="overflow-x: auto;">
+                        <table id="personas-table" class="table table-bordered table-striped" style="width: 100%; min-width: 800px;">
+                            <thead>
+                                <tr>
+                                    <th>Cod Persona</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>DNI</th>
+                                    <th>Teléfono</th>
+                                    <th>Dirección</th>
+                                    <th>Edad</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Estado Civil</th>
+                                    <th>Género</th>
+                                    <th>Nacionalidad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Fin del contenedor -->
                 </div>
             </div>  
         </div> 
     </div> 
-</div>  
 </div>
 
 <!-- Modal Insertar Persona -->
