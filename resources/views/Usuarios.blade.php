@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Administrador')
+@section('title', 'Usuarios')
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,8 @@
 <body>
 @section('content_header')
 <div class="container">
-  <h2>Administrador
-      <button type ="Button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert-administrador"> 
+  <h2>Usuarios
+      <button type ="Button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert-Usuario"> 
         Insertar
       </button>
   </h2>
@@ -103,7 +103,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Administradores:', data);
-                const tbody = document.querySelector('#administradores-table tbody');
+                const tbody = document.querySelector('#usuarios-table tbody');
                 tbody.innerHTML = ''; // Limpiar contenido previo
 
                 data.forEach(infor => {

@@ -22,7 +22,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class ="card-tittle">Listado de Empleados </h3>
+          <h3 class ="card-tittle">Listado de Clientes </h3>
         </div>
         <div class="card-body">
           <table id="Clientes-table" class="table table-bordered table-striped">
@@ -111,7 +111,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Administradores:', data);
-                const tbody = document.querySelector('#administradores-table tbody');
+                const tbody = document.querySelector('#Clientes-table tbody');
                 tbody.innerHTML = ''; // Limpiar contenido previo
 
                 data.forEach(infor => {

@@ -33,6 +33,8 @@ const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
@@ -113,6 +115,24 @@ app.get('/usuarios', (req, res) => {
     });
 });
 
+// POST login
+app.post('/login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    console.log(req.body)
+    mysqlConnection.query('CALL SEL_USUARIOS()', (err, rows) => {
+        if (!err) {
+            rows[0].forEach(element => {
+                if (element['Email'] == email && element['contrasena'] == password) {
+                    res.status(200).json(element);
+                }
+            });
+        } else {
+            console.log(err);
+            res.status(500).send('Error al obtener la lista de usuarios');
+        }
+    });
+});
 
 // POST a la tabla "Clientes"
 app.post('/clientes', (req, res) => {

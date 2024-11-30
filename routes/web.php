@@ -15,7 +15,6 @@ Route::get('/', function () {
 
 
 Route::get('/registro', [RegisterController::class, 'index']);
-
 Route::get('/dashboard', [AdministradorController::class, 'index'])->name('dashboard.index');
 
 Route::get('/dashboard/empleados', [EmpleadoController::class, 'index'])->name('empleados.index');

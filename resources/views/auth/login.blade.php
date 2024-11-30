@@ -24,8 +24,8 @@
 <body>
 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-<form method="POST" action="{{ route('login') }}">
-    @csrf
+<form id="login-form">
+@csrf
 <h1>Login</h1>
     <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" />    
     <!-- Email Address -->
@@ -67,5 +67,32 @@
         </x-primary-button>
     </div>
 </form>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    event.preventDefault();
+    console.log('XD')
+    const data = {
+        'email': document.getElementById('email').value,
+        'password': document.getElementById('password').value,
+    }
+
+    fetch('http://localhost:3000/login', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        console.log(response.json());
+        if (response.ok) {
+            window.location.href = '/dashboard';
+        } else {
+            alert('Error al registrar usuario');
+        }
+    })
+})
+</script>
 </body>
 </html>

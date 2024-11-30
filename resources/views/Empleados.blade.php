@@ -25,7 +25,7 @@
           <h3 class ="card-tittle">Listado de Empleados </h3>
         </div>
         <div class="card-body">
-          <table id="administradores-table" class="table table-bordered table-striped">
+          <table id="empleados-table" class="table table-bordered table-striped">
           <thead>
             <tr>
                 <th>Cod Persona</th>
@@ -111,7 +111,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Administradores:', data);
-                const tbody = document.querySelector('#administradores-table tbody');
+                const tbody = document.querySelector('#empleados-table tbody');
                 tbody.innerHTML = ''; // Limpiar contenido previo
 
                 data.forEach(infor => {

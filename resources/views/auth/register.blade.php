@@ -12,7 +12,7 @@
 </head>
 <body>
     <x-guest-layout>
-        <form method="POST" id="miFormulario">
+        <form method="POST" id="form-regisster">
             @csrf
             <h1>Register</h1>
             <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" />
@@ -133,10 +133,43 @@
     </x-guest-layout>
 
 <script>
-    document.getElementById('miFormulario').addEventListener('submit', function(event) {
+    document.getElementById('form-regisster').addEventListener('submit', function(event) {
         event.preventDefault();
-        console.log('Enviando formulario...');
-        window.location.href = '/dashboard';
+
+        const data = {
+            "NOMBRES": document.getElementById('nombres').value,
+            "APELLIDOS": document.getElementById('apellidos').value,
+            "DNI": document.getElementById('dni').value,
+            "TELEFONO": document.getElementById('telefono').value,
+            "DIRECCION": document.getElementById('direccion').value,
+            "FECHA_NACIMIENTO": document.getElementById('fecha_nacimiento').value,
+            "ESTADO_CIVIL": document.getElementById('estado_civil').value,
+            "GENERO": document.getElementById('genero').value,
+            "NACIONALIDAD": document.getElementById('nacionalidad').value,
+            "NOMBRE_USUARIO": document.getElementById('nombre_usuario').value,
+            "CONTRASENA": document.getElementById('contrasena').value,
+            "EMAIL": document.getElementById('email').value,
+            "HISTORIAL_COMPRAS": "Ninguna",
+            "FECHA_REGISTRO": new Date().toISOString().split('T')[0],
+            "ESTADO": "Activo",
+            "EDAD": parseInt(document.getElementById('edad').value, 10)
+        };
+
+        fetch('http://localhost:3000/UsuariosCLS', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                console.log(response.json());
+                if (response.ok) {
+                    window.location.href = '/dashboard';
+                } else {
+                    alert('Error al registrar usuario');
+                }
+            })
     });
 </script>
 </body>
