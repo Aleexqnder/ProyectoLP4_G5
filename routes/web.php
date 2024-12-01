@@ -25,6 +25,7 @@ route::put('/Clientes/{id}', [ClientesController::class, 'actualizar'])->name('c
 route::get('/empleados', [EmpleadosController::class, 'listar'])->name('empleados.listar');
 route::post('/empleados', [EmpleadosController::class, 'crear'])->name('empleados.crear');
 route::put('/empleados/{id}', [EmpleadosController::class, 'actualizar'])->name('empleados.actualizar');
+
 // Rutas para reparaciones
 Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('reparaciones.listar');
 Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('reparaciones.crear');

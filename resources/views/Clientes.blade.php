@@ -146,7 +146,6 @@
         </div>
     </div>
 </div>
-<!-- Modal para agregar nuevo cliente -->
  <!-- Modal de nuevo cliente -->
 <div class="modal fade" id="nuevoClienteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">

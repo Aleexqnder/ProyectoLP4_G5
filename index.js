@@ -352,16 +352,17 @@ app.put('/clientes/:id', (req, res) => {
 
 // PUT a la tabla "Empleados"
 app.put('/empleados/:id', (req, res) => {
-    const cod_empleado = req.params.id;
+    console.log(req.body); // Depuración
+    console.log('Datos recibidos:', req.body);
+    const cod_persona = req.params.id;
     const empleado = req.body;
+
     const sqlquery = `
-        CALL UPD_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        CALL UPD_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
-        cod_empleado,
-        empleado.salario,           
-        empleado.puesto,           
-        empleado.nombres,
+        cod_persona,
+        empleado.nombres, 
         empleado.apellidos,
         empleado.dni,
         empleado.telefono,
@@ -370,11 +371,10 @@ app.put('/empleados/:id', (req, res) => {
         empleado.estado_civil,
         empleado.genero,
         empleado.nacionalidad,
-        empleado.nombre_usuario,
-        empleado.contrasena,
-        empleado.email,
-        empleado.fecha_contratacion,  
-        empleado.edad
+        empleado.edad,
+        empleado.salario,
+        empleado.puesto,
+        empleado.fecha_contratacion
     ], (err) => {
         if (!err) {
             res.status(200).send("Empleado actualizado correctamente.");
