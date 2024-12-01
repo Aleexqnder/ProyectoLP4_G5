@@ -27,7 +27,7 @@
         <div class="card-body">
         <div style="overflow-x: auto;">
         <div class="table-responsive">
-        <table id="empleados-table" class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
                 <th>Cod Persona</th>
@@ -49,7 +49,7 @@
             </tr>
         </thead>
             
-                <tbody>
+                <tbody id="empleados-table">
                 
                 </tbody>
           </table>
@@ -144,7 +144,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-update">
+<div class="modal fade" id="modal-update" tabindex="-1" role="dialog">
 <div class="modal-dialog" role="document">
         <div class="modal-content bg-default">
             <div class="modal-header">
@@ -218,7 +218,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </form>

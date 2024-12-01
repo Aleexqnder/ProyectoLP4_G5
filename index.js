@@ -33,33 +33,47 @@ const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
 app.use(bodyParser.json());
 
-const mysqlConnection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    multipleStatements: true,
-    port: process.env.DB_PORT
-});
+let mysqlConnection;
 
-mysqlConnection.connect((err) => {
-    if (!err) {
-        console.log('Conexión exitosa a la base de datos.');
-    } else {
-        console.log('Error al conectarse a la base de datos.');
-    }
-});
+const connectToDatabase = () => {
+    mysqlConnection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        multipleStatements: true,
+        port: process.env.DB_PORT
+    });
+
+    mysqlConnection.connect((err) => {
+        if (!err) {
+            console.log('Conexión exitosa a la base de datos.');
+        } else {
+            console.log('Error al conectarse a la base de datos:', err);
+            setTimeout(connectToDatabase, 1000); // Reintentar en 1 segundos
+        }
+    });
+
+    mysqlConnection.on('error', (err) => {
+        console.log('Error de conexión a la base de datos:', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            connectToDatabase();
+        } else {
+            throw err;
+        }
+    });
+};
+
+connectToDatabase();
 
 app.listen(3000, () => console.log('Servidor corriendo en el puerto 3000.'));
-
-
 
 // Cierre del bloque general de las conexiones.
 
