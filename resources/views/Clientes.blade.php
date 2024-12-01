@@ -155,52 +155,68 @@
                 <form id="nuevo-cliente-form">
                     @csrf
                     <div class="form-group">
-                        <label for="nombres">Nombres:</label>
-                        <input type="text" class="form-control" name="nombres" required>
+                        <label for="NOMBRES">Nombres:</label>
+                        <input type="text" class="form-control" name="NOMBRES" required>
                     </div>
                     <div class="form-group">
-                        <label for="apellidos">Apellidos:</label>
-                        <input type="text" class="form-control" name="apellidos" required>
+                        <label for="APELLIDOS">Apellidos:</label>
+                        <input type="text" class="form-control" name="APELLIDOS" required>
                     </div>
                     <div class="form-group">
-                        <label for="dni">DNI:</label>
-                        <input type="text" class="form-control" name="dni" required>
+                        <label for="DNI">DNI:</label>
+                        <input type="text" class="form-control" name="DNI" required>
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" required>
+                        <label for="TELEFONO">Teléfono:</label>
+                        <input type="text" class="form-control" name="TELEFONO" required>
                     </div>
                     <div class="form-group">
-                        <label for="direccion">Dirección:</label>
-                        <input type="text" class="form-control" name="direccion" required>
+                        <label for="DIRECCION">Dirección:</label>
+                        <input type="text" class="form-control" name="DIRECCION" required>
                     </div>
                     <div class="form-group">
-                        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                        <input type="date" class="form-control" name="fecha_nacimiento" required>
+                        <label for="FECHA_NACIMIENTO">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-control" name="FECHA_NACIMIENTO" required>
                     </div>
                     <div class="form-group">
-                        <label for="estado_civil">Estado Civil:</label>
-                        <input type="text" class="form-control" name="estado_civil" required>
+                        <label for="ESTADO_CIVIL">Estado Civil:</label>
+                        <input type="text" class="form-control" name="ESTADO_CIVIL" required>
                     </div>
                     <div class="form-group">
-                        <label for="genero">Género:</label>
-                        <input type="text" class="form-control" name="genero" required>
+                        <label for="GENERO">Género:</label>
+                        <input type="text" class="form-control" name="GENERO" required>
                     </div>
                     <div class="form-group">
-                        <label for="nacionalidad">Nacionalidad:</label>
-                        <input type="text" class="form-control" name="nacionalidad" required>
+                        <label for="NACIONALIDAD">Nacionalidad:</label>
+                        <input type="text" class="form-control" name="NACIONALIDAD" required>
                     </div>
                     <div class="form-group">
-                        <label for="historial_compras">Historial de Compras:</label>
-                        <input type="text" class="form-control" name="historial_compras" required>
+                        <label for="NOMBRE_USUARIO">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" name="NOMBRE_USUARIO" required>
                     </div>
                     <div class="form-group">
-                        <label for="estado">Estado:</label>
-                        <input type="text" class="form-control" name="estado" required>
+                        <label for="CONTRASENA">Contraseña:</label>
+                        <input type="password" class="form-control" name="CONTRASENA" required>
                     </div>
                     <div class="form-group">
-                        <label for="edad">Edad:</label>
-                        <input type="number" class="form-control" name="edad" required>
+                        <label for="EMAIL">Email:</label>
+                        <input type="email" class="form-control" name="EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="HISTORIAL_COMPRAS">Historial de Compras:</label>
+                        <input type="text" class="form-control" name="HISTORIAL_COMPRAS" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="FECHA_REGISTRO">Fecha de Registro:</label>
+                        <input type="date" class="form-control" name="FECHA_REGISTRO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ESTADO">Estado:</label>
+                        <input type="text" class="form-control" name="ESTADO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="EDAD">Edad:</label>
+                        <input type="number" class="form-control" name="EDAD" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </form>
@@ -238,6 +254,41 @@
             "dom": '<"top"f>rt<"bottom"p><"clear">',
             "pagingType": "simple",
             "stateSave": true
+        });
+
+        // AJAX para agregar nuevo cliente
+        $('#nuevo-cliente-form').on('submit', function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '{{ route("clientes.crear") }}',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: response.success,
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.error,
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseText,
+                    });
+                }
+            });
         });
     });
 </script>
