@@ -249,22 +249,22 @@ app.post('/empleados', (req, res) => {
         CALL INS_PERSONA_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
-        empleado.NOMBRES,
-        empleado.APELLIDOS,
-        empleado.DNI,
-        empleado.TELEFONO,
-        empleado.DIRECCION,
-        empleado.FECHA_NACIMIENTO,
-        empleado.ESTADO_CIVIL,
-        empleado.GENERO,
-        empleado.NACIONALIDAD,
-        empleado.NOMBRE_USUARIO,
-        empleado.CONTRASENA,
-        empleado.EMAIL,
-        empleado.SALARIO,
-        empleado.PUESTO,
-        empleado.FECHA_CONTRATACION,
-        empleado.EDAD 
+        empleado['nombres'],
+        empleado['apellidos'],
+        empleado['dni'],
+        empleado['telefono'],
+        empleado['direccion'],
+        empleado['fecha_nacimiento'],
+        empleado['estado_civil'],
+        empleado['genero'],
+        empleado['nacionalidad'],
+        empleado['nombre_usuario'],
+        empleado['contrasena'],
+        empleado['email'],
+        empleado['salario'],
+        empleado['puesto'],
+        empleado['fecha_contratacion'],
+        empleado['edad']
     ], (err) => {
         if (!err) {
             res.status(201).send("Empleado ingresado correctamente.");
@@ -595,31 +595,34 @@ app.get('/REPARACIONES', (req, res) => {
 
 // POST reparaciones
 app.post('/REPARACIONES', (req, res) => {
-    const { cod_vehiculo, descripcion, fecha_reparacion } = req.body;
-
-    mysqlConnection.query("CALL INS_REPARACION (?,?,?)", [
-        cod_vehiculo, descripcion, fecha_reparacion
-    ], (err, rows, fields) => {
-        if (!err) {
-            res.status(201).json({
-                message: 'Reparación ingresada correctamente.'
-            });
-        } else {
-            console.log(err);
-            res.status(500).json({
-                message: 'Error al ingresar la reparación.',
-                error: err
-            });
+    const { cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
+    mysqlConnection.query(
+        "CALL INS_REPARACION(?, ?, ?, ?)",
+        [cod_vehiculo, descripcion, fecha_reparacion, costo],
+        (err, rows, fields) => {
+            if (!err) {
+                res.status(201).json({
+                    message: 'Reparación ingresada correctamente.',
+                    data: rows[0], // Opcional: devuelve el resultado si lo necesitas
+                });
+            } else {
+                console.error('Error al ingresar la reparación:', err);
+                res.status(500).json({
+                    message: 'Error al ingresar la reparación.',
+                    error: err.sqlMessage || err.message,
+                });
+            }
         }
-    });
+    );
 });
+
 
 // PUT Reparaciones
 app.put('/REPARACIONES', (req, res) => {
-    const { cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion } = req.body;
+    const { cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
 
-    mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?)", [
-        cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion
+     mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?,?)", [
+        cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo
     ], (err, rows, fields) => {
         if (!err) {
             res.status(200).json({

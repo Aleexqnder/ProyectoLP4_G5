@@ -17,7 +17,7 @@
     
 @stop
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="width: 100%; height: 100%;">
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -25,6 +25,7 @@
           <h3 class ="card-tittle">Listado de Usuarios </h3>
         </div>
         <div class="card-body">
+          <div style="overflow-x: auto;">
           <table id="usuarios-table" class="table table-bordered table-striped">
           <thead>
           <tr>
@@ -44,6 +45,7 @@
             </tbody>
           </table>
         </div>
+          </div>
       </div>  
     </div> 
   </div> 
