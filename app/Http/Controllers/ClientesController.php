@@ -4,18 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class ClientesController extends Controller
 {
-
-public function listar()
-{
-    $response = Http::get('http://localhost:3000/clientes');
-    $clientes = $response->json();
-    if ($response->successful()) {
-        return view('clientes', compact('clientes'));
-    } else {
-        return back()->withErrors(['error' => 'No se pudo obtener la lista de los clientes.']);
+    public function listar()
+    {
+        $response = Http::get('http://localhost:3000/clientes');
+        $clientes = $response->json();
+        if ($response->successful()) {
+            return view('clientes', compact('clientes'));
+        } else {
+            return back()->withErrors(['error' => 'No se pudo obtener la lista de los clientes.']);
+        }
     }
-}
-
     
 
     public function crear(Request $request)
