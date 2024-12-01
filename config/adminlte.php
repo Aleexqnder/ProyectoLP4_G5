@@ -333,6 +333,10 @@ return [
                     'text' => 'Clientes',
                     'route' => 'clientes.listar',
                 ],
+                [
+                    'text' => 'Empleados',
+                    'route' => 'empleados.listar',
+                ],
             ],
         ],
 

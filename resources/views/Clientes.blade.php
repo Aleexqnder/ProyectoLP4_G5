@@ -146,8 +146,8 @@
         </div>
     </div>
 </div>
-
 <!-- Modal para agregar nuevo cliente -->
+ <!-- Modal de nuevo cliente -->
 <div class="modal fade" id="nuevoClienteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -160,7 +160,70 @@
             <div class="modal-body">
                 <form id="nuevo-cliente-form">
                     @csrf
-                    <!-- Campos del formulario -->
+                    <div class="form-group">
+                        <label for="NOMBRES">Nombres:</label>
+                        <input type="text" class="form-control" name="NOMBRES" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="APELLIDOS">Apellidos:</label>
+                        <input type="text" class="form-control" name="APELLIDOS" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="DNI">DNI:</label>
+                        <input type="text" class="form-control" name="DNI" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="TELEFONO">Teléfono:</label>
+                        <input type="text" class="form-control" name="TELEFONO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="DIRECCION">Dirección:</label>
+                        <input type="text" class="form-control" name="DIRECCION" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="FECHA_NACIMIENTO">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-control" name="FECHA_NACIMIENTO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ESTADO_CIVIL">Estado Civil:</label>
+                        <input type="text" class="form-control" name="ESTADO_CIVIL" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="GENERO">Género:</label>
+                        <input type="text" class="form-control" name="GENERO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="NACIONALIDAD">Nacionalidad:</label>
+                        <input type="text" class="form-control" name="NACIONALIDAD" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="NOMBRE_USUARIO">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" name="NOMBRE_USUARIO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="CONTRASENA">Contraseña:</label>
+                        <input type="password" class="form-control" name="CONTRASENA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="EMAIL">Email:</label>
+                        <input type="email" class="form-control" name="EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="HISTORIAL_COMPRAS">Historial de Compras:</label>
+                        <input type="text" class="form-control" name="HISTORIAL_COMPRAS" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="FECHA_REGISTRO">Fecha de Registro:</label>
+                        <input type="date" class="form-control" name="FECHA_REGISTRO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ESTADO">Estado:</label>
+                        <input type="text" class="form-control" name="ESTADO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="EDAD">Edad:</label>
+                        <input type="number" class="form-control" name="EDAD" required>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </form>
             </div>
@@ -170,8 +233,7 @@
         </div>
     </div>
 </div>
-@stop
-
+@endsection
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
