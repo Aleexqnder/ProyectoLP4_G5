@@ -337,6 +337,10 @@ return [
                     'text' => 'Empleados',
                     'route' => 'empleados.listar',
                 ],
+                [
+                    'text' => 'Personas',
+                    'route' => 'personas.listar',
+                ],
             ],
         ],
 

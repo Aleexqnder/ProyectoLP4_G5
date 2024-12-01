@@ -6,6 +6,7 @@ use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ReparacionesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\PersonasController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -31,7 +32,8 @@ Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('re
 Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('reparaciones.crear');
 Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])->name('reparaciones.actualizar');
 
-
+// Rutas para personas
+Route::get('/personas', [PersonasController::class, 'listar'])->name('personas.listar');
 
 
 require __DIR__.'/auth.php';
