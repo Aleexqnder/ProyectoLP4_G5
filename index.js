@@ -308,6 +308,7 @@ app.put('/usuarios/:cod_usuario', (req, res) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Error al actualizar el usuario');
+            
         }
         res.status(200).send('Usuario actualizado correctamente');
     });
@@ -316,11 +317,13 @@ app.put('/usuarios/:cod_usuario', (req, res) => {
 
 // PUT a la tabla "Clientes"
 app.put('/clientes/:id', (req, res) => {
+    console.log(req.body); // Depuración
+    console.log('Datos recibidos:', req.body);
     const cod_persona = req.params.id;
     const cliente = req.body;
 
     const sqlquery = `
-        CALL UPD_CLIENTE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        CALL UPD_CLIENTE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
         cod_persona,
@@ -333,9 +336,6 @@ app.put('/clientes/:id', (req, res) => {
         cliente.estado_civil,
         cliente.genero,
         cliente.nacionalidad,
-        cliente.nombre_usuario,
-        cliente.contrasena,
-        cliente.email,
         cliente.historial_compras,
         cliente.estado,
         cliente.edad

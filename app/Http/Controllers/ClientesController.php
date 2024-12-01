@@ -43,9 +43,10 @@ class ClientesController extends Controller
             return response()->json(['error' => 'Hubo un problema al crear el Cliente.'], 500);
         }
     }
+    
     public function actualizar(Request $request, $id)
     {
-        $response = Http::put('http://localhost:3000//clientes/:id', [
+        $response = Http::put('http://localhost:3000/clientes/' . $id, [
             'cod_persona' => $id,
             'nombres' => $request->input('nombres'),
             'apellidos' => $request->input('apellidos'),
@@ -56,9 +57,6 @@ class ClientesController extends Controller
             'estado_civil' => $request->input('estado_civil'),
             'genero' => $request->input('genero'),
             'nacionalidad' => $request->input('nacionalidad'),
-            'nombre_usuario' => $request->input('nombre_usuario'),
-            'contrasena' => $request->input('contrasena'),
-            'email' => $request->input('email'),
             'historial_compras' => $request->input('historial_compras'),
             'estado' => $request->input('estado'),
             'edad' => $request->input('edad'),
@@ -68,5 +66,5 @@ class ClientesController extends Controller
         } else {
             return response()->json(['error' => 'Hubo un error al actualizar el Cliente.'], 500);
         }
-    }
+    }   
 }
