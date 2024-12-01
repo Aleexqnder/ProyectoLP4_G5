@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Administrador')
+@section('title', 'Clientes')
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
 <body>
 @section('content_header')
 <div class="container">
-  <h2>Administrador
+  <h2>Clientes
            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert-cliente">
           Insertar
       </button>
@@ -164,16 +164,16 @@
                     tr.id = "row-user-" + cliente.cod_cliente;
 
                     tr.innerHTML = `
-                        <td>${cliente.COD_PERSONA}</td>
-                        <td>${cliente.NOMBRES}</td>
-                        <td>${cliente.APELLIDOS}</td>
-                        <td>${cliente.DNI}</td>
-                        <td>${cliente.TELEFONO}</td>
-                        <td>${cliente.DIRECCION}</td>
-                        <td>${formatDate(cliente.FECHA_NACIMIENTO)}</td>
-                        <td>${cliente.ESTADO_CIVIL}</td>
-                        <td>${cliente.GENERO}</td>
-                        <td>${cliente.NACIONALIDAD}</td>
+                        <td>${cliente.cod_persona}</td>
+                        <td>${cliente.nombres}</td>
+                        <td>${cliente.apellidos}</td>
+                        <td>${cliente.dni}</td>
+                        <td>${cliente.telefono}</td>
+                        <td>${cliente.direccion}</td>
+                        <td>${formatDate(cliente.fecha_nacimiento)}</td>
+                        <td>${cliente.estado_civil}</td>
+                        <td>${cliente.genero}</td>
+                        <td>${cliente.nacionalidad}</td>
                         <td>${cliente.cod_cliente}</td>
                         <td>${cliente.historial_compras}</td>
                         <td>${formatDate(cliente.fecha_registro)}</td>

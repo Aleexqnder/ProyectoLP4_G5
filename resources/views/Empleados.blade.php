@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Administrador')
+@section('title', 'Empleados')
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +26,7 @@
         </div>
         <div class="card-body">
         <div style="overflow-x: auto;">
+        <div class="table-responsive">
         <table id="empleados-table" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -47,9 +48,12 @@
                 <th>Acciones</th>
             </tr>
         </thead>
+            
+                <tbody>
+                
+                </tbody>
           </table>
         </div>
-          
         </div>
       </div>  
     </div> 
