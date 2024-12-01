@@ -15,11 +15,20 @@
                         <table id="clientes-table" class="table table-hover table-striped">
                             <thead class="bg-primary text-white">
                                 <tr>
-                                    <th>ID Cliente</th>
+                                    <th>Codigo de persona</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
                                     <th>DNI</th>
                                     <th>Teléfono</th>
+                                    <th>Direccion</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Estado Civil</th>
+                                    <th>Género</th>
+                                    <th>Nacionalidad</th>
+                                    <th>Historial de Compras</th>
+                                    <th>Fecha de registro</th>
+                                    <th>Estado</th>
+                                    <th>Edad</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -31,6 +40,15 @@
                                     <td>{{ $cliente["apellidos"] }}</td>
                                     <td>{{ $cliente["dni"] }}</td>
                                     <td>{{ $cliente["telefono"] }}</td>
+                                    <td>{{ $cliente["direccion"] }}</td>
+                                    <td>{{ $cliente["fecha_nacimiento"] }}</td>
+                                    <td>{{ $cliente["estado_civil"] }}</td>
+                                    <td>{{ $cliente["genero"] }}</td>
+                                    <td>{{ $cliente["nacionalidad"] }}</td>
+                                    <td>{{ $cliente["historial_compras"] }}</td>
+                                    <td>{{ $cliente["fecha_registro"] }}</td>
+                                    <td>{{ $cliente["estado"] }}</td>
+                                    <td>{{ $cliente["edad"] }}</td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarClienteModal{{ $cliente['cod_persona'] }}">
                                             <i class="fas fa-edit"></i> Editar
@@ -89,18 +107,6 @@
                                                     <div class="form-group">
                                                         <label for="nacionalidad">Nacionalidad:</label>
                                                         <input type="text" class="form-control" name="nacionalidad" value="{{ $cliente['nacionalidad'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="nombre_usuario">Nombre de Usuario:</label>
-                                                        <input type="text" class="form-control" name="nombre_usuario" value="{{ $cliente['nombre_usuario'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="contrasena">Contraseña:</label>
-                                                        <input type="password" class="form-control" name="contrasena" value="{{ $cliente['contrasena'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Email:</label>
-                                                        <input type="email" class="form-control" name="email" value="{{ $cliente['email'] }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="historial_compras">Historial de Compras:</label>
@@ -183,18 +189,6 @@
                     <div class="form-group">
                         <label for="nacionalidad">Nacionalidad:</label>
                         <input type="text" class="form-control" name="nacionalidad" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre_usuario">Nombre de Usuario:</label>
-                        <input type="text" class="form-control" name="nombre_usuario" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" class="form-control" name="contrasena" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="historial_compras">Historial de Compras:</label>

@@ -4,28 +4,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class ClientesController extends Controller
 {
-    public function listar()
-    {
-        $response = Http::get('http://localhost:3000/clientes');
-        
-        // Verifica si la respuesta es exitosa
-        if ($response->successful()) {
-            // Decodifica la respuesta JSON
-            $data = $response->json();
-            
-            // Asegúrate de que el array no esté vacío y contenga los clientes
-            if (isset($data['data']) && is_array($data['data'])) {
-                $clientes = $data['data'];
-            } else {
-                // Si no hay clientes, puedes inicializar como un array vacío
-                $clientes = [];
-            }
-    
-            return view('Clientes', compact('clientes'));
-        } else {
-            return back()->withErrors(['error' => 'No se pudo obtener la lista de los clientes.']);
-        }
+
+public function listar()
+{
+    $response = Http::get('http://localhost:3000/clientes');
+    $clientes = $response->json();
+    if ($response->successful()) {
+        return view('clientes', compact('clientes'));
+    } else {
+        return back()->withErrors(['error' => 'No se pudo obtener la lista de los clientes.']);
     }
+}
 
     
 
