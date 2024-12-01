@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Listado de Empleados</h5>
@@ -16,8 +16,8 @@
                 </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
-                        <table id="empleados-table" class="table table-hover table-striped">
-                            <thead class="bg-primary text-white">
+                        <table id="empleados-table" class="table table-hover table-dark">
+                            <thead class="bg-success text-white">
                                 <tr>
                                     <th>Codigo de persona</th>
                                     <th>Nombres</th>
@@ -243,7 +243,7 @@
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
         // Configuración de DataTable
         $('#empleados-table').DataTable({
             language: {
@@ -254,10 +254,10 @@
                 infoFiltered: "(filtrado de _MAX_ registros totales)",
                 search: "Buscar:",
                 paginate: {
-                    first: "Primero",
-                    last: "Último",
-                    next: "Siguiente",
-                    previous: "Anterior"
+                    first: "<button class='btn btn-sm btn-primary pagination-btn'>Primero</button>",
+                    last: "<button class='btn btn-sm btn-primary pagination-btn'>Último</button>",
+                    next: "<button class='btn btn-sm btn-primary pagination-btn'>Siguiente</button>",
+                    previous: "<button class='btn btn-sm btn-primary pagination-btn'>Anterior</button>"
                 }
             },
             dom: '<"top"f>rt<"bottom"p><"clear">',
