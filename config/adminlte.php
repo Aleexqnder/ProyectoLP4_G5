@@ -324,25 +324,14 @@ return [
             'text' => 'Dashboard',
             'route' => 'dashboard.index',
         ],
+
         [
             'text' => 'Modulo Personas',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Personas',
-                    'route' => 'personas.index',
-                ],
-                [
-                    'text' => 'Usuarios',
-                    'route' => 'usuarios.index',
-                ],
-                [
                     'text' => 'Clientes',
-                    'route' => 'clientes.index',
-                ],
-                [
-                    'text' => 'Empleados',
-                    'route' => 'empleados.index',
+                    'route' => 'clientes.listar',
                 ],
             ],
         ],
@@ -354,10 +343,6 @@ return [
                 [
                     'text' => 'Reparaciones',
                     'route' => 'reparaciones.listar',
-                ],
-                [
-                    'text' => 'Vehiculos',
-                    'route' => 'usuarios.index',
                 ],
             ],
         ],
