@@ -330,6 +330,16 @@ return [
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
+                    'text' => 'Personas',
+                    'route' => 'personas.listar',
+                ],
+                
+                [
+                    'text' => 'Usuarios',
+                    'route' => 'usuarios.listar',
+                ],
+
+                [
                     'text' => 'Clientes',
                     'route' => 'clientes.listar',
                 ],
@@ -337,10 +347,7 @@ return [
                     'text' => 'Empleados',
                     'route' => 'empleados.listar',
                 ],
-                [
-                    'text' => 'Personas',
-                    'route' => 'personas.listar',
-                ],
+                
             ],
         ],
 

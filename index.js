@@ -121,7 +121,8 @@ app.get('/clientes', (req, res) => {
 app.get('/usuarios', (req, res) => {
     mysqlConnection.query('CALL SEL_USUARIOS()', (err, rows) => {
         if (!err) {
-            res.status(200).json(rows[0]); // Retorna todos los usuarios
+            console.log(rows[0]); 
+            res.status(200).json(rows[0]); 
         } else {
             console.log(err);
             res.status(500).send('Error al obtener la lista de usuarios');
@@ -381,6 +382,49 @@ app.put('/empleados/:id', (req, res) => {
         } else {
             console.log(err);
             res.status(500).send('Error al actualizar el empleado');
+        }
+    });
+});
+
+app.post('/usuarios', (req, res) => {
+    const usuario = req.body;
+
+    const sqlquery = `
+        CALL INS_USUARIOS(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(sqlquery, [
+        usuario.cod_persona,
+        usuario.nombre_usuario,
+        usuario.contrasena,
+        usuario.email
+    ], (err) => {
+        if (!err) {
+            res.status(200).send("Usuario creado con éxito.");
+        } else {
+            console.log(err);
+            res.status(500).send('Hubo un problema al crear el Usuario.');
+        }
+    });
+});
+
+app.put('/usuarios/:id', (req, res) => {
+    const cod_usuario = req.params.id;
+    const usuario = req.body;
+
+    const sqlquery = `
+        CALL UPD_USUARIO(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(sqlquery, [
+        cod_usuario,
+        usuario.nombre_usuario,
+        usuario.contrasena,
+        usuario.email
+    ], (err) => {
+        if (!err) {
+            res.status(200).send("Usuario actualizado con éxito.");
+        } else {
+            console.log(err);
+            res.status(500).send('Hubo un problema al actualizar el Usuario.');
         }
     });
 });
