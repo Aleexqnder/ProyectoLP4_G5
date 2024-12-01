@@ -7,8 +7,11 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card shadow-lg border-0">
-                <div class="card-header bg-dark text-white">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Listado de Clientes</h5>
+                    <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoClienteModal">
+                        <i class="fas fa-plus-circle"></i> Agregar
+                    </button>
                 </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
@@ -52,9 +55,6 @@
                                     <td>
                                         <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarClienteModal{{ $cliente['cod_persona'] }}">
                                             <i class="fas fa-edit"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoClienteModal">
-                                            <i class="fas fa-plus-circle"></i> Agregar
                                         </button>
                                     </td>
                                 </tr>
@@ -229,82 +229,21 @@
                 "infoFiltered": "(filtrado de _MAX_ registros totales)",
                 "search": "Buscar:",
                 "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
+                    "first": "<button class='btn btn-sm btn-primary pagination-btn'>Primero</button>",
+                    "last": "<button class='btn btn-sm btn-primary pagination-btn'>Último</button>",
+                    "next": "<button class='btn btn-sm btn-primary pagination-btn'>Siguiente</button>",
+                    "previous": "<button class='btn btn-sm btn-primary pagination-btn'>Anterior</button>"
                 }
-            }
-        });
-        // AJAX para agregar nuevo cliente
-        $('#nuevo-cliente-form').on('submit', function(event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            $.ajax({
-                url: '{{ route("clientes.crear") }}',
-                method: 'POST',
-                data: formData,
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: response.success,
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.error,
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: xhr.responseText,
-                    });
-                }
-            });
-        });
-        // AJAX para editar cliente
-        $('.editar-cliente-form').on('submit', function(event) {
-            event.preventDefault();
-            var clienteId = $(this).data('id');
-            var formData = $(this).serialize();
-            $.ajax({
-                url: '{{ route("clientes.actualizar", "") }}/' + clienteId,
-                method: 'PUT',
-                data: formData,
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: response.success,
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.error,
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: xhr.responseText,
-                    });
-                }
-            });
+            },
+            "dom": '<"top"f>rt<"bottom"p><"clear">',
+            "pagingType": "simple",
+            "stateSave": true
         });
     });
 </script>
+<style>
+    .pagination-btn {
+        margin-right: 10px; 
+    }
+</style>
 @endsection
