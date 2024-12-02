@@ -435,11 +435,11 @@ app.put('/usuarios/:id', (req, res) => {
 
 // GET de cotizaciones
 app.get('/cotizaciones', (req, res) => {
-    mysqlConnection.query('CALL SEL_COTIZACION(NULL)', (err, rows) => {
+    mysqlConnection.query('CALL SEL_COTIZACION()', (err, rows) => {
         if (!err) {
-            res.status(200).json(rows[0]); 
+            res.status(200).json(rows[0]); // Enviar los resultados de la consulta en formato JSON
         } else {
-            console.log(err);
+            console.error(err); // Registrar el error en la consola
             res.status(500).send('Error al obtener la lista de cotizaciones');
         }
     });
