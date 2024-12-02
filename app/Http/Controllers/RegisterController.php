@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
         if ($response->successful()) {
             // Redirigir al dashboard después de un registro exitoso
-            return redirect()->route('dashboard.index')->with('success', 'Usuario registrado correctamente.');
+            return redirect()->route('login')->with('success', 'Usuario registrado correctamente.');
         } else {
             return redirect()->route('register.index')->with('error', 'Hubo un problema al registrar el usuario.');
         }
