@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('content_header')
-    <h1>Gestión de Usuarios</h1>
+    <h1>Gestión de Cotizaciones</h1>
 @stop
 
 @section('content')
@@ -9,62 +9,178 @@
         <div class="col-md-12">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Listado de Usuarios</h5>
-                    <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoUsuarioModal">
+                    <h5 class="mb-0">Listado de Cotizaciones</h5>
+                    <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevaCotizacionModal">
                         <i class="fas fa-plus-circle"></i> Agregar
                     </button>
                 </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
-                        <table id="usuarios-table" class="table table-hover table-dark">
+                        <table id="cotizaciones-table" class="table table-hover table-dark">
                             <thead class="bg-green text-white">
                                 <tr>
-                                    <th>Codigo Detalle</th>
+                                    <th>Código de Cotización</th>
+                                    <th>Código de Persona</th>
+                                    <th>Fecha</th>
                                     <th>Descripción</th>
                                     <th>Monto</th>
-                                    <th>Codigo del cliente</th>
-                                    <th>Codigo del empleado</th>
+                                    <th>Código de Cliente</th>
+                                    <th>Código de Empleado</th>
                                     <th>Cantidad</th>
-                                    <th>Tipo de producto</th>
-                                    <th>Estado del producto</th>
-                                    <th>Código de la cotización</th>
-                                    <th>Codigo de la persona</th>
-                                    <th>Fecha</th>
+                                    <th>Tipo de Producto</th>
+                                    <th>Estado del Producto</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($cotizaciones as $detalles_cotizacion)
+                                @foreach($cotizaciones as $cotizacion)
                                 <tr>
-                                    <td>{{ $detalles_cotizacion["cod_detalle"] }}</td>
-                                    <td>{{ $detalles_cotizacion["descripcion"] }}</td>
-                                    <td>{{ $detalles_cotizacion["monto"] }}</td>
-                                    <td>{{ $detalles_cotizacion["cod_cliente"] }}</td>
-                                    <td>{{ $detalles_cotizacion["cod_empleado"] }}</td>
-                                    <td>{{ $detalles_cotizacion["cantidad"] }}</td>
-                                    <td>{{ $detalles_cotizacion["tipo_producto"] }}</td>
-                                    <td>{{ $detalles_cotizacion["estado_producto"] }}</td>
-                                    <td>{{ $detalles_cotizacion["cod_cotizacion"] }}</td>
-                                    <td>{{ $detalles_cotizacion["cod_persona"] }}</td>
-                                    <td>{{ $detalles_cotizacion["fecha"] }}</td>
+                                    <td>{{ $cotizacion["cod_cotizacion"] }}</td>
+                                    <td>{{ $cotizacion["cod_persona"] }}</td>
+                                    <td>{{ $cotizacion["fecha"] }}</td>
+                                    <td>{{ $cotizacion["descripcion"] }}</td>
+                                    <td>{{ $cotizacion["monto"] }}</td>
+                                    <td>{{ $cotizacion["cod_cliente"] }}</td>
+                                    <td>{{ $cotizacion["cod_empleado"] }}</td>
+                                    <td>{{ $cotizacion["cantidad"] }}</td>
+                                    <td>{{ $cotizacion["tipo_producto"] }}</td>
+                                    <td>{{ $cotizacion["estado_producto"] }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarCotizacionModal{{ $cotizacion['cod_cotizacion'] }}">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button>
+                                    </td>
                                 </tr>
-                                <!-- Modal para editar usuario -->
-                                
+                                <!-- Modal para editar cotización -->
+                                <div class="modal fade" id="editarCotizacionModal{{ $cotizacion['cod_cotizacion'] }}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-warning text-dark">
+                                                <h5 class="modal-title">Editar Cotización</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="editar-cotizacion-form" data-id="{{ $cotizacion['cod_cotizacion'] }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="form-group">
+                                                        <label for="cod_persona">Código de Persona:</label>
+                                                        <input type="text" class="form-control" name="cod_persona" value="{{ $cotizacion['cod_persona'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fecha">Fecha:</label>
+                                                        <input type="date" class="form-control" name="fecha" value="{{ $cotizacion['fecha'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="descripcion">Descripción:</label>
+                                                        <input type="text" class="form-control" name="descripcion" value="{{ $cotizacion['descripcion'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="monto">Monto:</label>
+                                                        <input type="number" class="form-control" name="monto" value="{{ $cotizacion['monto'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="cod_cliente">Código de Cliente:</label>
+                                                        <input type="text" class="form-control" name="cod_cliente" value="{{ $cotizacion['cod_cliente'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="cod_empleado">Código de Empleado:</label>
+                                                        <input type="text" class="form-control" name="cod_empleado" value="{{ $cotizacion['cod_empleado'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="cantidad">Cantidad:</label>
+                                                        <input type="number" class="form-control" name="cantidad" value="{{ $cotizacion['cantidad'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="tipo_producto">Tipo de Producto:</label>
+                                                        <input type="text" class="form-control" name="tipo_producto" value="{{ $cotizacion['tipo_producto'] }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="estado_producto">Estado del Producto:</label>
+                                                        <input type="text" class="form-control" name="estado_producto" value="{{ $cotizacion['estado_producto'] }}" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-warning btn-block">Guardar</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endforeach    
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer text-center bg-dark text-white">
-                    <p>© Gestión de Usuarios</p>
+                    <p>© Gestión de Cotizaciones</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal para agregar nuevo usuario -->
-<
+<!-- Modal para agregar nueva cotización -->
+<div class="modal fade" id="nuevaCotizacionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Agregar Nueva Cotización</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="nueva-cotizacion-form">
+                    @csrf
+                    <div class="form-group">
+                        <label for="cod_persona">Código de Persona:</label>
+                        <input type="text" class="form-control" name="cod_persona" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" name="fecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" class="form-control" name="descripcion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="monto">Monto:</label>
+                        <input type="number" class="form-control" name="monto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cod_cliente">Código de Cliente:</label>
+                        <input type="text" class="form-control" name="cod_cliente" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cod_empleado">Código de Empleado:</label>
+                        <input type="text" class="form-control" name="cod_empleado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" class="form-control" name="cantidad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_producto">Tipo de Producto:</label>
+                        <input type="text" class="form-control" name="tipo_producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado_producto">Estado del Producto:</label>
+                        <input type="text" class="form-control" name="estado_producto" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -76,7 +192,7 @@
 <script>
     $(document).ready(function() {
         // Configuración de DataTable
-        $('#usuarios-table').DataTable({
+        $('#cotizaciones-table').DataTable({
             language: {
                 lengthMenu: "Mostrar _MENU_ registros por página",
                 zeroRecords: "No se encontraron resultados",
@@ -97,12 +213,12 @@
         });
 
         // Funciones AJAX
-        // AJAX para agregar nuevo usuario
-        $('#nuevo-usuario-form').on('submit', function(event) {
+        // AJAX para agregar nueva cotización
+        $('#nueva-cotizacion-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("usuarios.crear") }}',
+                url: '{{ route("cotizaciones.crear") }}',
                 method: 'POST',
                 data: formData,
                 success: function(response) {
@@ -132,13 +248,13 @@
             });
         });
 
-        // AJAX para editar usuario
-        $('.editar-usuario-form').on('submit', function(event) {
+        // AJAX para editar cotización
+        $('.editar-cotizacion-form').on('submit', function(event) {
             event.preventDefault();
-            var usuarioId = $(this).data('id');
+            var cotizacionId = $(this).data('id');
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("usuarios.actualizar", "") }}/' + usuarioId,
+                url: '{{ route("cotizaciones.actualizar", "") }}/' + cotizacionId,
                 method: 'PUT',
                 data: formData,
                 success: function(response) {
