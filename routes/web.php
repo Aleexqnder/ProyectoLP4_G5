@@ -10,6 +10,9 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CotizacionesController;
 use App\Http\Controllers\RegisterController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Definir la ruta para mostrar el formulario de registro
 Route::get('/registro', [RegisterController::class, 'index'])->name('register.index');
