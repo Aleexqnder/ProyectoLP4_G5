@@ -1,5 +1,3 @@
-<!-- resources/views/auth/register.blade.php -->
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -12,9 +10,9 @@
 </head>
 <body>
     <x-guest-layout>
-        <form method="POST" id="form-regisster">
+        <form method="POST" action="{{ route('register.crear') }}">
             @csrf
-            <h1>Register</h1>
+            <h1>Registro de usuario</h1>
             <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" />
 
             <div class="container">
@@ -64,10 +62,8 @@
                         </div>
                     </div>
 
-                  
                     <div class="col-md-6">
                         <!-- Apellido-->                      
-
                         <div class="mt-4">
                             <x-input-label for="apellidos" :value="__('Apellido')" />
                             <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos')" required autocomplete="apellidos" />
@@ -131,46 +127,5 @@
             </div>
         </form>
     </x-guest-layout>
-
-<script>
-    document.getElementById('form-regisster').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const data = {
-            "NOMBRES": document.getElementById('nombres').value,
-            "APELLIDOS": document.getElementById('apellidos').value,
-            "DNI": document.getElementById('dni').value,
-            "TELEFONO": document.getElementById('telefono').value,
-            "DIRECCION": document.getElementById('direccion').value,
-            "FECHA_NACIMIENTO": document.getElementById('fecha_nacimiento').value,
-            "ESTADO_CIVIL": document.getElementById('estado_civil').value,
-            "GENERO": document.getElementById('genero').value,
-            "NACIONALIDAD": document.getElementById('nacionalidad').value,
-            "NOMBRE_USUARIO": document.getElementById('nombre_usuario').value,
-            "CONTRASENA": document.getElementById('contrasena').value,
-            "EMAIL": document.getElementById('email').value,
-            "HISTORIAL_COMPRAS": "Ninguna",
-            "FECHA_REGISTRO": new Date().toISOString().split('T')[0],
-            "ESTADO": "Activo",
-            "EDAD": parseInt(document.getElementById('edad').value, 10)
-        };
-
-        fetch('http://localhost:3000/UsuariosCLS', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                console.log(response.json());
-                if (response.ok) {
-                    window.location.href = '/dashboard';
-                } else {
-                    alert('Error al registrar usuario');
-                }
-            })
-    });
-</script>
 </body>
 </html>

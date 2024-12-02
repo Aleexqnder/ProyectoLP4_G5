@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ReparacionesController;
 use App\Http\Controllers\ClientesController;
@@ -9,26 +8,30 @@ use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CotizacionesController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Definir la ruta para mostrar el formulario de registro
+Route::get('/registro', [RegisterController::class, 'index'])->name('register.index');
 
-Route::get('/registro', [RegisterController::class, 'index']);
+// Definir la ruta para manejar la creación de un nuevo usuario
+Route::post('/registro', [RegisterController::class, 'crear'])->name('register.crear');
+
+// Otras rutas existentes...
 Route::get('/dashboard', [AdministradorController::class, 'index'])->name('dashboard.index');
 
 // Rutas para clientes
-route::get('/Clientes', [ClientesController::class, 'listar'])->name('clientes.listar');
-route::post('/Clientes', [ClientesController::class, 'crear'])->name('clientes.crear');
-route::put('/Clientes/{id}', [ClientesController::class, 'actualizar'])->name('clientes.actualizar');
+Route::get('/Clientes', [ClientesController::class, 'listar'])->name('clientes.listar');
+Route::post('/Clientes', [ClientesController::class, 'crear'])->name('clientes.crear');
+Route::put('/Clientes/{id}', [ClientesController::class, 'actualizar'])->name('clientes.actualizar');
 
-//Rutas para empleados
-route::get('/empleados', [EmpleadosController::class, 'listar'])->name('empleados.listar');
-route::post('/empleados', [EmpleadosController::class, 'crear'])->name('empleados.crear');
-route::put('/empleados/{id}', [EmpleadosController::class, 'actualizar'])->name('empleados.actualizar');
-
+// Rutas para empleados
+Route::get('/empleados', [EmpleadosController::class, 'listar'])->name('empleados.listar');
+Route::post('/empleados', [EmpleadosController::class, 'crear'])->name('empleados.crear');
+Route::put('/empleados/{id}', [EmpleadosController::class, 'actualizar'])->name('empleados.actualizar');
 
 // Rutas para personas
 Route::get('/personas', [PersonasController::class, 'listar'])->name('personas.listar');
@@ -47,7 +50,5 @@ Route::put('/cotizaciones/{id}', [CotizacionesController::class, 'actualizar'])-
 Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('reparaciones.listar');
 Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('reparaciones.crear');
 Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])->name('reparaciones.actualizar');
-
-
 
 require __DIR__.'/auth.php';
