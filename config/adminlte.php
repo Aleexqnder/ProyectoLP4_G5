@@ -362,6 +362,17 @@ return [
             ],
         ],
 
+        [
+            'text' => 'Modulo Cotizaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Cotizaciones',
+                    'route' => 'cotizaciones.listar',
+                ],
+            ],
+        ],
+
 
     ],
 
