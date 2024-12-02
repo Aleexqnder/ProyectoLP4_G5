@@ -435,11 +435,11 @@ app.put('/usuarios/:id', (req, res) => {
 
 // GET de cotizaciones
 app.get('/cotizaciones', (req, res) => {
-    mysqlConnection.query('CALL SEL_COTIZACION(NULL)', (err, rows) => {
+    mysqlConnection.query('CALL SEL_COTIZACION()', (err, rows) => {
         if (!err) {
-            res.status(200).json(rows[0]); 
+            res.status(200).json(rows[0]); // Enviar los resultados de la consulta en formato JSON
         } else {
-            console.log(err);
+            console.error(err); // Registrar el error en la consola
             res.status(500).send('Error al obtener la lista de cotizaciones');
         }
     });
@@ -483,6 +483,8 @@ app.put('/cotizaciones/:id', (req, res) => {
     const cod_cotizacion = req.params.id;
     const cotizacion = req.body; 
 
+    console.log("Datos recibidos para actualizar:", cotizacion); // Depuración
+
     const sqlquery = `
         CALL UPD_COTIZACION(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
@@ -491,7 +493,7 @@ app.put('/cotizaciones/:id', (req, res) => {
         cod_cotizacion,
         cotizacion.cod_persona,
         cotizacion.fecha,
-        cotizacion.cod_detalle,
+        cotizacion.cod_detalle, 
         cotizacion.descripcion,
         cotizacion.monto,
         cotizacion.cod_cliente,
@@ -499,17 +501,16 @@ app.put('/cotizaciones/:id', (req, res) => {
         cotizacion.cantidad,
         cotizacion.tipo_producto,
         cotizacion.estado_producto
-    ], (err) => {
+    ], (err, results) => {
         if (err) {
             console.error("Error al actualizar la cotización:", err); // Muestra el error si ocurre
             res.status(500).send('Error al actualizar la cotización');
         } else {
-            console.log("Cotización actualizada correctamente"); // Muestra el éxito de la operación
+            console.log("Cotización actualizada correctamente:", results); // Depuración
             res.status(200).send("Cotización actualizada correctamente.");
         }
     });
 });
-
 
 //                                  20211001469 Kevin David Miguel Ávila
 //                                  20201003997 André Alessandro Lagos Cano

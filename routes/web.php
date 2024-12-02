@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\CotizacionesController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -37,7 +38,10 @@ Route::get('/usuarios', [UsuariosController::class, 'listar'])->name('usuarios.l
 Route::post('/usuarios', [UsuariosController::class, 'crear'])->name('usuarios.crear');
 Route::put('/usuarios/{id}', [UsuariosController::class, 'actualizar'])->name('usuarios.actualizar');
 
-
+// Rutas para cotizaciones
+Route::get('/cotizaciones', [CotizacionesController::class, 'listar'])->name('cotizaciones.listar');
+Route::post('/cotizaciones', [CotizacionesController::class, 'crear'])->name('cotizaciones.crear');
+Route::put('/cotizaciones/{id}', [CotizacionesController::class, 'actualizar'])->name('cotizaciones.actualizar');
 
 // Rutas para reparaciones
 Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('reparaciones.listar');
