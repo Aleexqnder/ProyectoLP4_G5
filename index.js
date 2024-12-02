@@ -131,20 +131,26 @@ app.get('/usuarios', (req, res) => {
 });
 
 // POST login
+// POST login
 app.post('/login', (req, res) => {
-    let email = req.body.email;
-    let password = req.body.password;
-    console.log(req.body)
-    mysqlConnection.query('CALL SEL_USUARIOS()', (err, rows) => {
+    let Email = req.body.Email.trim();
+    let contrasena = req.body.contrasena.trim();
+
+    console.log('Datos recibidos en el servidor:', req.body);
+
+    const sqlQuery = 'SELECT * FROM usuarios WHERE Email = ? AND contrasena = ?';
+    mysqlConnection.query(sqlQuery, [Email, contrasena], (err, rows) => {
         if (!err) {
-            rows[0].forEach(element => {
-                if (element['Email'] == email && element['contrasena'] == password) {
-                    res.status(200).json(element);
-                }
-            });
+            console.log('Resultado de la consulta:', rows);
+            if (rows.length > 0) {
+                let user = rows[0];
+                res.status(200).json({ success: true, user: user });
+            } else {
+                res.status(401).json({ success: false, message: 'Las credenciales no coinciden con nuestros registros.' });
+            }
         } else {
-            console.log(err);
-            res.status(500).send('Error al obtener la lista de usuarios');
+            console.error('Error al consultar la base de datos:', err);
+            res.status(500).send('Error al consultar la base de datos');
         }
     });
 });
