@@ -661,6 +661,7 @@ app.get('/REPARACIONES', (req, res) => {
 // POST reparaciones
 app.post('/REPARACIONES', (req, res) => {
     const { cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
+
     mysqlConnection.query(
         "CALL INS_REPARACION(?, ?, ?, ?)",
         [cod_vehiculo, descripcion, fecha_reparacion, costo],
@@ -686,7 +687,7 @@ app.post('/REPARACIONES', (req, res) => {
 app.put('/REPARACIONES', (req, res) => {
     const { cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo } = req.body;
 
-     mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?,?)", [
+    mysqlConnection.query("CALL UPD_REPARACION (?,?,?,?,?)", [
         cod_reparacion, cod_vehiculo, descripcion, fecha_reparacion, costo
     ], (err, rows, fields) => {
         if (!err) {

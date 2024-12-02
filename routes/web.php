@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ReparacionesController;
+use App\Http\Controllers\VehiculosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\PersonasController;
@@ -50,5 +51,10 @@ Route::put('/cotizaciones/{id}', [CotizacionesController::class, 'actualizar'])-
 Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('reparaciones.listar');
 Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('reparaciones.crear');
 Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])->name('reparaciones.actualizar');
+
+// Rutas para vehiculos
+Route::get('/vehiculos', [VehiculosController::class, 'listar'])->name('vehiculos.listar');
+Route::post('/vehiculos', [VehiculosController::class, 'crear'])->name('vehiculos.crear');
+Route::put('/vehiculos/{id}', [VehiculosController::class, 'actualizar'])->name('vehiculos.actualizar');
 
 require __DIR__.'/auth.php';

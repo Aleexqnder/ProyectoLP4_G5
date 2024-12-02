@@ -89,68 +89,93 @@
                     @method('PUT')
                     <input type="hidden" name="cod_empleado" id="cod_empleado">
                     <input type="hidden" name="cod_persona" id="cod_persona">
-                    <div class="form-group">
-                        <label for="nombres">Nombres:</label>
-                        <input type="text" class="form-control" name="nombres" id="nombres" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombres">Nombres:</label>
+                            <input type="text" class="form-control" name="nombres" id="nombres" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="apellidos">Apellidos:</label>
+                            <input type="text" class="form-control" name="apellidos" id="apellidos" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="apellidos">Apellidos:</label>
-                        <input type="text" class="form-control" name="apellidos" id="apellidos" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dni">DNI:</label>
+                            <input type="text" class="form-control" name="dni" id="dni" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" class="form-control" name="telefono" id="telefono" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="dni">DNI:</label>
-                        <input type="text" class="form-control" name="dni" id="dni" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" class="form-control" name="direccion" id="direccion" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="estado_civil">Estado Civil:</label>
+                            <input type="text" class="form-control" name="estado_civil" id="estado_civil" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="genero_editar">Género:</label>
+                            <select class="form-control" name="genero" id="genero_editar" required>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="direccion">Dirección:</label>
-                        <input type="text" class="form-control" name="direccion" id="direccion" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nacionalidad">Nacionalidad:</label>
+                            <input type="text" class="form-control" name="nacionalidad" id="nacionalidad" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="salario">Salario:</label>
+                            <input type="number" class="form-control" name="salario" id="salario" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                        <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="puesto_editar">Puesto:</label>
+                            <select class="form-control" name="puesto" id="puesto_editar" required>
+                                <option value="">Selecciona un puesto</option>
+                                <option value="Mecánico">Mecánico</option>
+                                <option value="Supervisor">Supervisor</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Recepcionista">Recepcionista</option>
+                                <option value="Gerente">Gerente</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fecha_contratacion">Fecha de Contratación:</label>
+                            <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="estado_civil">Estado Civil:</label>
-                        <input type="text" class="form-control" name="estado_civil" id="estado_civil" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="edad">Edad:</label>
+                            <input type="number" class="form-control" name="edad" id="edad" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <!-- Placeholder for alignment -->
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="genero_editar">Género:</label>
-                        <select class="form-control" name="genero" id="genero_editar" required>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nacionalidad">Nacionalidad:</label>
-                        <input type="text" class="form-control" name="nacionalidad" id="nacionalidad" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="salario">Salario:</label>
-                        <input type="number" class="form-control" name="salario" id="salario" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="puesto_editar">Puesto:</label>
-                        <select class="form-control" name="puesto" id="puesto_editar" required>
-                            <option value="">Selecciona un puesto</option>
-                            <option value="Mecánico">Mecánico</option>
-                            <option value="Supervisor">Supervisor</option>
-                            <option value="Técnico">Técnico</option>
-                            <option value="Recepcionista">Recepcionista</option>
-                            <option value="Gerente">Gerente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha_contratacion">Fecha de Contratación:</label>
-                        <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edad">Edad:</label>
-                        <input type="number" class="form-control" name="edad" id="edad" required>
-                    </div>
+                    
                     <button type="submit" class="btn btn-warning btn-block">Guardar</button>
                 </form>
             </div>
@@ -174,81 +199,105 @@
             <div class="modal-body">
                 <form id="nuevo-empleado-form">
                     @csrf
-                    <div class="form-group">
-                        <label for="nombres_nuevo">Nombres:</label>
-                        <input type="text" class="form-control" name="nombres" id="nombres_nuevo" required>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombres_nuevo">Nombres:</label>
+                            <input type="text" class="form-control" name="nombres" id="nombres_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="apellidos_nuevo">Apellidos:</label>
+                            <input type="text" class="form-control" name="apellidos" id="apellidos_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="apellidos_nuevo">Apellidos:</label>
-                        <input type="text" class="form-control" name="apellidos" id="apellidos_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dni_nuevo">DNI:</label>
+                            <input type="text" class="form-control" name="dni" id="dni_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono_nuevo">Teléfono:</label>
+                            <input type="text" class="form-control" name="telefono" id="telefono_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="dni_nuevo">DNI:</label>
-                        <input type="text" class="form-control" name="dni" id="dni_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="direccion_nuevo">Dirección:</label>
+                            <input type="text" class="form-control" name="direccion" id="direccion_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fecha_nacimiento_nuevo">Fecha de Nacimiento:</label>
+                            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="telefono_nuevo">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="estado_civil_nuevo">Estado Civil:</label>
+                            <input type="text" class="form-control" name="estado_civil" id="estado_civil_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="genero_nuevo">Género:</label>
+                            <select class="form-control" name="genero" id="genero_nuevo" required>
+                                <option value="">Selecciona Género</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="direccion_nuevo">Dirección:</label>
-                        <input type="text" class="form-control" name="direccion" id="direccion_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nacionalidad_nuevo">Nacionalidad:</label>
+                            <input type="text" class="form-control" name="nacionalidad" id="nacionalidad_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="salario_nuevo">Salario:</label>
+                            <input type="number" class="form-control" name="salario" id="salario_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="fecha_nacimiento_nuevo">Fecha de Nacimiento:</label>
-                        <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombre_usuario_nuevo">Nombre de usuario:</label>
+                            <input type="text" class="form-control" name="nombre_usuario" id="nombre_usuario_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="contrasena_nuevo">Contraseña:</label>
+                            <input type="password" class="form-control" name="contrasena" id="contrasena_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="estado_civil_nuevo">Estado Civil:</label>
-                        <input type="text" class="form-control" name="estado_civil" id="estado_civil_nuevo" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email_nuevo">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="puesto_nuevo">Puesto:</label>
+                            <select class="form-control" name="puesto" id="puesto_nuevo" required>
+                                <option value="">Selecciona un puesto</option>
+                                <option value="Mecánico">Mecánico</option>
+                                <option value="Supervisor">Supervisor</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Recepcionista">Recepcionista</option>
+                                <option value="Gerente">Gerente</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="genero_nuevo">Género:</label>
-                        <select class="form-control" name="genero" id="genero_nuevo" required>
-                            <option value="">Selecciona Género</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fecha_contratacion_nuevo">Fecha de Contratación:</label>
+                            <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion_nuevo" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="edad_nuevo">Edad:</label>
+                            <input type="number" class="form-control" name="edad" id="edad_nuevo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nacionalidad_nuevo">Nacionalidad:</label>
-                        <input type="text" class="form-control" name="nacionalidad" id="nacionalidad_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre_usuario_nuevo">Nombre de usuario:</label>
-                        <input type="text" class="form-control" name="nombre_usuario" id="nombre_usuario_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contrasena_nuevo">Contraseña:</label>
-                        <input type="password" class="form-control" name="contrasena" id="contrasena_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email_nuevo">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="salario_nuevo">Salario:</label>
-                        <input type="number" class="form-control" name="salario" id="salario_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="puesto_nuevo">Puesto:</label>
-                        <select class="form-control" name="puesto" id="puesto_nuevo" required>
-                            <option value="">Selecciona un puesto</option>
-                            <option value="Mecánico">Mecánico</option>
-                            <option value="Supervisor">Supervisor</option>
-                            <option value="Técnico">Técnico</option>
-                            <option value="Recepcionista">Recepcionista</option>
-                            <option value="Gerente">Gerente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha_contratacion_nuevo">Fecha de Contratación:</label>
-                        <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion_nuevo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edad_nuevo">Edad:</label>
-                        <input type="number" class="form-control" name="edad" id="edad_nuevo" required>
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </form>
             </div>

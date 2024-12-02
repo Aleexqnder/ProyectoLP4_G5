@@ -359,6 +359,10 @@ return [
                     'text' => 'Reparaciones',
                     'route' => 'reparaciones.listar',
                 ],
+                [
+                    'text' => 'Vehiculos',
+                    'route' => 'vehiculos.listar',
+                ],
             ],
         ],
 
