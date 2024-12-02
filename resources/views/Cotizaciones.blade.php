@@ -52,6 +52,7 @@
                                     </td>
                                 </tr>
                                 <!-- Modal para editar cotización -->
+                                                               <!-- Modal para editar cotización -->
                                 <div class="modal fade" id="editarCotizacionModal{{ $cotizacion['cod_cotizacion'] }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -65,6 +66,10 @@
                                                 <form class="editar-cotizacion-form" data-id="{{ $cotizacion['cod_cotizacion'] }}">
                                                     @csrf
                                                     @method('PUT')
+                                                    <div class="form-group">
+                                                        <label for="cod_detalle">Código de Detalle:</label>
+                                                        <input type="text" class="form-control" name="cod_detalle" value="{{ $cotizacion['cod_detalle'] }}" required>
+                                                    </div>
                                                     <div class="form-group">
                                                         <label for="cod_persona">Código de Persona:</label>
                                                         <input type="text" class="form-control" name="cod_persona" value="{{ $cotizacion['cod_persona'] }}" required>
@@ -109,7 +114,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>            
                                 @endforeach    
                             </tbody>
                         </table>
@@ -250,40 +255,40 @@
 
         // AJAX para editar cotización
         $('.editar-cotizacion-form').on('submit', function(event) {
-            event.preventDefault();
-            var cotizacionId = $(this).data('id');
-            var formData = $(this).serialize();
-            $.ajax({
-                url: '{{ route("cotizaciones.actualizar", "") }}/' + cotizacionId,
-                method: 'PUT',
-                data: formData,
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: response.success,
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.error,
-                        });
-                    }
-                },
-                error: function(xhr) {
+        event.preventDefault();
+        var cotizacionId = $(this).data('id');
+        var formData = $(this).serialize();
+        $.ajax({
+            url: '{{ route("cotizaciones.actualizar", "") }}/' + cotizacionId,
+            method: 'PUT',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: response.success,
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: xhr.responseText,
+                        text: response.error,
                     });
                 }
-            });
+            },
+            error: function(xhr) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseText,
+                });
+            }
         });
     });
+});
 </script>
 
 <style>

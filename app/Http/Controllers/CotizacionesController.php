@@ -38,8 +38,7 @@ class CotizacionesController extends Controller
     
     public function actualizar(Request $request, $id)
     {
-        $response = Http::put('http://localhost:3000/cotizacion/' . $id, [
-            'cod_cotizacion' => $id,
+        $response = Http::put('http://localhost:3000/cotizaciones/' . $id, [
             'cod_persona' => $request->input('cod_persona'),
             'fecha' => $request->input('fecha'),
             'cod_detalle' => $request->input('cod_detalle'),
