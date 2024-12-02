@@ -360,7 +360,7 @@ return [
                 ],
                 [
                     'text' => 'Vehiculos',
-                    'route' => 'usuarios.index',
+                    'route' => 'vehiculos.listar',
                 ],
             ],
         ],
