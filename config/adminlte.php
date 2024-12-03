@@ -347,6 +347,17 @@ return [
             ],
         ],
 
+        [
+            'text' => 'Modulo Reservaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reservaciones',
+                    'route' => 'reservaciones.listar',
+                ],
+            ],
+        ],
+
 
     ],
 
