@@ -32,4 +32,9 @@ Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])-
 
 
 
+// Rutas para reportes
+Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
+Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
+Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
+
 require __DIR__.'/auth.php';
