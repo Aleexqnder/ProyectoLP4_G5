@@ -363,6 +363,7 @@ return [
         ],
 
         [
+            //Modulo reportes
             'text' => 'Modulo Reportes',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
