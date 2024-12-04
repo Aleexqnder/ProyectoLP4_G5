@@ -377,6 +377,17 @@ return [
             ],
         ],
 
+        [
+            'text' => 'Modulo Reportes',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reportes',
+                    'route' => 'reportes.index',
+                ],
+
+            ],
+        ],
 
     ],
 

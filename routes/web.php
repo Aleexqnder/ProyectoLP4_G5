@@ -57,4 +57,9 @@ Route::get('/vehiculos', [VehiculosController::class, 'listar'])->name('vehiculo
 Route::post('/vehiculos', [VehiculosController::class, 'crear'])->name('vehiculos.crear');
 Route::put('/vehiculos/{id}', [VehiculosController::class, 'actualizar'])->name('vehiculos.actualizar');
 
+// Rutas para reportes
+Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
+Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
+Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
+
 require __DIR__.'/auth.php';
