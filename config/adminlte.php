@@ -363,6 +363,7 @@ return [
         ],
 
         [
+            //espacio utilizado para reportes
             //Modulo reportes
             'text' => 'Modulo Reportes',
             'icon' => 'fas fa-fw fa-share',

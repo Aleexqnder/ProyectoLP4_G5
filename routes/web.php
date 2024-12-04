@@ -30,9 +30,8 @@ Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('re
 Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])->name('reparaciones.actualizar');
 
 
-
-
-// Rutas para reportes
+//archivo utilizado para creacion de rutas para modulo reporte
+// Rutas para reportes 
 Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
 Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
 Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
