@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ReparacionesController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ReservacionesController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
