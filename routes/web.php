@@ -17,9 +17,9 @@ Route::get('/registro', [RegisterController::class, 'index']);
 Route::get('/dashboard', [AdministradorController::class, 'index'])->name('dashboard.index');
 
 // Rutas para clientes
-route::get('/Clientes', [ClientesController::class, 'listar'])->name('clientes.listar');
-route::post('/Clientes', [ClientesController::class, 'crear'])->name('clientes.crear');
-route::put('/Clientes/{id}', [ClientesController::class, 'actualizar'])->name('clientes.actualizar');
+Route::get('/Clientes', [ClientesController::class, 'listar'])->name('clientes.listar');
+Route::post('/Clientes', [ClientesController::class, 'crear'])->name('clientes.crear');
+Route::put('/Clientes/{id}', [ClientesController::class, 'actualizar'])->name('clientes.actualizar');
 
 // Rutas para reparaciones
 Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('reparaciones.listar');
