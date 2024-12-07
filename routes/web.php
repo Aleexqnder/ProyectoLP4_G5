@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Definir la ruta para mostrar el formulario de registro
-Route::get('/registro', [RegisterController::class, 'index'])->name('register.index');
-
 // Definir la ruta para manejar la creación de un nuevo usuario
 Route::post('/registro', [RegisterController::class, 'crear'])->name('register.crear');
 
