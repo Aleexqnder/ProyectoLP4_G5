@@ -7,7 +7,7 @@ class ReportesController extends Controller
 {
     public function listar()
     {
-        $response = Http::get('http://localhost:3000/reportes');
+        $response = Http::get('http://localhost:3000/Reportes');
         $data = $response->json();
         if ($response->successful()) {
             $reportes = $data['data'];
@@ -18,7 +18,7 @@ class ReportesController extends Controller
     }
     public function crear(Request $request)
     {
-        $response = Http::post('http://localhost:3000/reportes', [
+        $response = Http::post('http://localhost:3000/Reportes', [
             'cod_reporte' => $request->input('cod_reporte'),
             'des_reporte' => $request->input('des_reporte'),
             'fecha_reporte' => $request->input('fecha_reporte'),
@@ -32,7 +32,7 @@ class ReportesController extends Controller
     }
     public function actualizar(Request $request, $id)
     {
-        $response = Http::put('http://localhost:3000/reportes', [
+        $response = Http::put('http://localhost:3000/Reportes', [
             'cod_reporte' => $id,
             'cod_reporte' => $request->input('cod_reporte'),
             'des_reporte' => $request->input('des_reporte'),

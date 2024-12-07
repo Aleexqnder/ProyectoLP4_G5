@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\ReparacionesController;
+use App\Http\Controllers\ReportesController; //reportes
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -32,8 +33,8 @@ Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])-
 
 //archivo utilizado para creacion de rutas para modulo reporte
 // Rutas para reportes 
-Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
-Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
-Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
+Route::get('/reportes', [ReportesController::class, 'listar'])->name('reportes.listar');
+Route::post('/reportes', [ReportesController::class, 'crear'])->name('reportes.crear');
+Route::put('/reportes/{id}', [ReportesController::class, 'actualizar'])->name('reportes.actualizar');
 
 require __DIR__.'/auth.php';
