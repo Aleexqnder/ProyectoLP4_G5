@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class ReservacionesController extends Controller
 {
-    // Método para listar las reservaciones
+    // Método para listar las reservaciones del modulo
     public function listar()
     {
         $response = Http::get('http://localhost:3000/reservaciones');

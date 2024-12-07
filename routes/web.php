@@ -26,7 +26,7 @@ Route::get('/reparaciones', [ReparacionesController::class, 'listar'])->name('re
 Route::post('/reparaciones', [ReparacionesController::class, 'crear'])->name('reparaciones.crear');
 Route::put('/reparaciones/{id}', [ReparacionesController::class, 'actualizar'])->name('reparaciones.actualizar');
 
-// Rutas para reservaciones
+// Rutas para reservaciones. 
 Route::get('/reservaciones', [ReservacionesController::class, 'listar'])->name('reservaciones.listar');
 Route::post('/reservaciones', [ReservacionesController::class, 'crear'])->name('reservaciones.crear');
 Route::put('/reservaciones/{id}', [ReservacionesController::class, 'actualizar'])->name('reservaciones.actualizar');

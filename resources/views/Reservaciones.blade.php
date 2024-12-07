@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody id="reservaciones-tbody">
-                                <!-- Se llenará dinámicamente con JavaScript -->
+                                <!-- Se llenará dinámicamente con el lenguaje JavaScript -->
                             </tbody>
                         </table>
                     </div>
