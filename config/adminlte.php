@@ -383,7 +383,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Reportes',
-                    'route' => 'reportes.index',
+                    'route' => 'reportes.listar',
                 ],
 
             ],
