@@ -11,6 +11,7 @@ use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CotizacionesController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReservacionesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,15 +56,16 @@ Route::get('/vehiculos', [VehiculosController::class, 'listar'])->name('vehiculo
 Route::post('/vehiculos', [VehiculosController::class, 'crear'])->name('vehiculos.crear');
 Route::put('/vehiculos/{id}', [VehiculosController::class, 'actualizar'])->name('vehiculos.actualizar');
 
-// Rutas para reportes
-Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
-Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
-Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
-
 //archivo utilizado para creacion de rutas para modulo reporte
 // Rutas para reportes 
 Route::get('/reportes', [ReportesController::class, 'listar'])->name('reportes.listar');
 Route::post('/reportes', [ReportesController::class, 'crear'])->name('reportes.crear');
 Route::put('/reportes/{id}', [ReportesController::class, 'actualizar'])->name('reportes.actualizar');
+
+
+// Rutas para reservaciones
+Route::get('/reservaciones', [ReservacionesController::class, 'listar'])->name('reservaciones.listar');
+Route::post('/reservaciones', [ReservacionesController::class, 'crear'])->name('reservaciones.crear');
+Route::put('/reservaciones/{id}', [ReservacionesController::class, 'actualizar'])->name('reservaciones.actualizar');
 
 require __DIR__.'/auth.php';
