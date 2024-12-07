@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ReparacionesController;
+use App\Http\Controllers\ReportesController; //reportes
 use App\Http\Controllers\VehiculosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\EmpleadosController;
@@ -58,5 +59,11 @@ Route::put('/vehiculos/{id}', [VehiculosController::class, 'actualizar'])->name(
 Route::get('/reportes', [ReparacionesController::class, 'listar'])->name('reportes.listar');
 Route::post('/reportes', [ReparacionesController::class, 'crear'])->name('reportes.crear');
 Route::put('/reportes/{id}', [ReparacionesController::class, 'actualizar'])->name('reportes.actualizar');
+
+//archivo utilizado para creacion de rutas para modulo reporte
+// Rutas para reportes 
+Route::get('/reportes', [ReportesController::class, 'listar'])->name('reportes.listar');
+Route::post('/reportes', [ReportesController::class, 'crear'])->name('reportes.crear');
+Route::put('/reportes/{id}', [ReportesController::class, 'actualizar'])->name('reportes.actualizar');
 
 require __DIR__.'/auth.php';
