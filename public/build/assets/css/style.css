@@ -46,6 +46,10 @@ body {
   letter-spacing: 0.02em;
 }
 
+.no-transform {
+    text-transform: none;
+}
+
 h1,
 .h1,
 h2,

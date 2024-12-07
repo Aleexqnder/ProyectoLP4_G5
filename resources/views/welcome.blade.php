@@ -123,12 +123,14 @@
     <div class="pattern-overlay pattern-left position-absolute">
     <img src="{{ asset('Build/assets/img/hero-pattern-left.png') }}" alt="pattern">
     </div>
-    <div class="hero-content container text-center">
+        <div class="hero-content container text-center">
         <div class="row">
             <div class="detail mb-4">
-                <h1><span class="text-primary">MecaMasters</span></h1>
+                <h1><span class="text-primary no-transform">MecaMasters</span></h1>
                 <br>
-                <p class="hero-paragraph">MecaMasters es un proyecto enfocado en brindar soluciones eficientes para la gestión de servicios automotrices. Diseñado para optimizar la organización, seguimiento y administración de reparaciones, cotizaciones y reservaciones, nuestro sistema integra bases de datos robustas y APIs funcionales. Durante este tiempo, hemos trabajado en crear una herramienta que facilite la operatividad diaria del taller, mejorando la experiencia tanto para los clientes como para los empleados.</p>
+                <p class="hero-paragraph">
+                    MecaMasters es un proyecto enfocado en brindar soluciones eficientes para la gestión de servicios automotrices. Diseñado para optimizar la organización, seguimiento y administración de reparaciones, cotizaciones y reservaciones, nuestro sistema integra bases de datos robustas y APIs funcionales. Durante este tiempo, hemos trabajado en crear una herramienta que facilite la operatividad diaria del taller, mejorando la experiencia tanto para los clientes como para los empleados.
+                </p>
             </div>
         </div>
     </div>

@@ -11,47 +11,58 @@
 <body>
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form id="login-form">
+    <form id="login-form" class="container mt-5" action="{{ route('login') }}" method="POST">
         @csrf
-        <h1>Login</h1>
-        <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" />    
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="Email" :value="__('Email')" />
-            <x-text-input id="Email" class="block mt-1 w-full" type="email" name="Email" :value="old('Email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('Email')" class="mt-2" />
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center mb-4">Login</h1>
+                <div class="text-center mb-4">
+                    <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" />
+                </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-             <x-input-label for="contrasena" :value="__('Contraseña')" />
+                <!-- Email Address -->
+                <div class="form-group mb-4">
+                    <x-input-label for="Email" :value="__('Email')" />
+                    <x-text-input id="Email" class="form-control" type="email" name="Email" :value="old('Email')" required autofocus autocomplete="username" />
+                    <x-input-error :messages="$errors->get('Email')" class="mt-2" />
+                </div>
 
-            <x-text-input id="contrasena" class="block mt-1 w-full"
-            type="password"
-            name="contrasena"
-            required autocomplete="current-password" />
+                <!-- Password -->
+                <div class="form-group mb-4">
+                    <x-input-label for="contrasena" :value="__('Contraseña')" />
 
-            <x-input-error :messages="$errors->get('contrasena')" class="mt-2" />
-        </div>
+                    <x-text-input id="contrasena" class="form-control"
+                    type="password"
+                    name="contrasena"
+                    required autocomplete="current-password" />
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+                    <x-input-error :messages="$errors->get('contrasena')" class="mt-2" />
+                </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+                <!-- Remember Me -->
+                <div class="form-group mb-4">
+                    <div class="form-check">
+                        <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                        <label for="remember_me" class="form-check-label">{{ __('Recuerdame') }}</label>
+                    </div>
+                </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+                <!-- Botones -->
+                <div class="row">
+                    <div class="col-6">
+                        @if (Route::has('password.request'))
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md" href="{{ route('password.request') }}">
+                                {{ __('¿Olvidaste tu contraseña?') }}
+                            </a>
+                        @endif
+                    </div>
+                    <div class="col-6 text-end">
+                        <x-primary-button class="btn btn-primary BottonBlue">
+                            {{ __('Iniciar Sesión') }}
+                        </x-primary-button>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 
