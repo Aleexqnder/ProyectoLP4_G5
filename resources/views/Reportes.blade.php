@@ -24,46 +24,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($reportes as $reportes)
+                                @foreach($reportes as $reporte)
                                 <tr>
-                                @foreach($reportes as $reportes)
-                                    <td>{{ $reportes["cod_reporte"] }}</td>
-                                    <td>{{ $reportes["des_reporte"] }}</td>
-                                    <td>{{ $reportes["fecha_reporte"] }}</td>
+                                @foreach($reportes as $reporte)
+                                    <td>{{ $reporte["cod_reporte"] }}</td>
+                                    <td>{{ $reporte["des_reporte"] }}</td>
+                                    <td>{{ $reporte["fecha_reporte"] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReportesModal{{ $reportes['cod_reporte'] }}">
+                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReporteModal{{ $reporte['cod_reporte'] }}">
                                             <i class="fas fa-edit"></i> Editar
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoReportesModal">
+                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoReporteModal">
                                             <i class="fas fa-plus-circle"></i> Agregar
                                         </button>
                                     </td>
                                 </tr>
                                 <!-- Modal de editar reparación -->
-                                <div class="modal fade" id="editarReportesModal{{ $reportes['cod_reporte'] }}" tabindex="-1" role="dialog">
+                                <div class="modal fade" id="editarReporteModal{{ $reporte['cod_reporte'] }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header bg-warning text-dark">
-                                                <h5 class="modal-title">Editar Reportes</h5>
+                                                <h5 class="modal-title">Editar Reporte</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="editar-reporte-form" data-id="{{ $reportes['cod_reportes'] }}">
+                                                <form class="editar-reporte-form" data-id="{{ $reporte['cod_reportes'] }}">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group">
                                                         <label for="cod_reporte">Código Reporte:</label>
-                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reportes['cod_reporte'] }}" required>
+                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reporte['cod_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="des_reporte">Descripción Reporte:</label>
-                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $des_reporte['des_reporte'] }}" required>
+                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $reporte['des_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="fecha_reporte">Fecha Reporte:</label>
-                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reportes['fecha_reporte'] }}" required>
+                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reporte['fecha_reporte'] }}" required>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-warning btn-block">Guardar</button>
@@ -88,7 +88,7 @@
     </div>
 </div>
 <!-- Modal de nueva reparación -->
-<div class="modal fade" id="NuevoReportesModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="NuevoReporteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
@@ -186,7 +186,7 @@
             var reporteId = $(this).data('id');
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reporte.actualizar", "") }}/' + reporteId,
+                url: '{{ route("reportes.actualizar", "") }}/' + reporteId,
                 method: 'PUT',
                 data: formData,
                 success: function(response) {

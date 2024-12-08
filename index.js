@@ -545,7 +545,7 @@ app.get('/reportes', (req, res) => {
 
   
   
-  app.post('/reportes', (req, res) => {
+app.post('/reportes', (req, res) => {
     const reportes = req.body;
     const sqlquery = `
         CALL INS_REPORTES(?, ?);
@@ -561,9 +561,9 @@ app.get('/reportes', (req, res) => {
             res.status(500).send('Error al ingresar el reporte');
         }
     });
-  });
+});
   
-  app.put('/reportes/:id', (req, res) => {
+app.put('/reportes/:id', (req, res) => {
     const cod_reporte = req.params.id;
     const reportes = req.body;
 

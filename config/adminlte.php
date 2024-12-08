@@ -370,6 +370,10 @@ return [
             'submenu' => [
                 [
                     'text' => 'Reportes',
+                    'route' => 'reportes.listar',
+                ],
+                [
+                    'text' => 'Reportes',
                     'route' => 'reportes.index',
                 ],
 

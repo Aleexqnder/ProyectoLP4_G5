@@ -22,7 +22,7 @@ class ReportesController extends Controller
             'cod_reporte' => $request->input('cod_reporte'),
             'des_reporte' => $request->input('des_reporte'),
             'fecha_reporte' => $request->input('fecha_reporte'),
-            
+    
         ]);
         if ($response->successful()) {
             return response()->json(['success' => 'Reporte creado con éxito.']);
