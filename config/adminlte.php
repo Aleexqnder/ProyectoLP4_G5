@@ -330,9 +330,24 @@ return [
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
+                    'text' => 'Personas',
+                    'route' => 'personas.listar',
+                ],
+                
+                [
+                    'text' => 'Usuarios',
+                    'route' => 'usuarios.listar',
+                ],
+
+                [
                     'text' => 'Clientes',
                     'route' => 'clientes.listar',
                 ],
+                [
+                    'text' => 'Empleados',
+                    'route' => 'empleados.listar',
+                ],
+                
             ],
         ],
 
@@ -343,17 +358,6 @@ return [
                 [
                     'text' => 'Reparaciones',
                     'route' => 'reparaciones.listar',
-                ],
-            ],
-        ],
-
-        [
-            'text' => 'Modulo Reservaciones',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Reservaciones',
-                    'route' => 'reservaciones.listar',
                 ],
             ],
         ],

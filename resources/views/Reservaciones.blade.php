@@ -114,10 +114,8 @@
                 }
             });
         }
-
         // Llamar a la función para cargar reservaciones
         cargarReservaciones();
-
         // Agregar nueva reservación con POST
         $('#nueva-reservacion-form').on('submit', function(event) {
             event.preventDefault();
@@ -145,7 +143,6 @@
                 }
             });
         });
-
         // Editar reservación con PUT
         $(document).on('click', '.editar-reservacion', function() {
             const reservacionId = $(this).data('id');
@@ -153,7 +150,6 @@
                 $('input[name="cod_persona"]').val(reservacion.cod_persona);
                 $('input[name="cod_vehiculo"]').val(reservacion.cod_vehiculo);
                 $('input[name="fecha_reservacion"]').val(reservacion.fecha_reservacion);
-
                 $('#nueva-reservacion-form').off('submit').on('submit', function(event) {
                     event.preventDefault();
                     const formData = $(this).serialize();

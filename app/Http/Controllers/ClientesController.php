@@ -7,26 +7,13 @@ class ClientesController extends Controller
     public function listar()
     {
         $response = Http::get('http://localhost:3000/clientes');
-        
-        // Verifica si la respuesta es exitosa
+        $clientes = $response->json();
         if ($response->successful()) {
-            // Decodifica la respuesta JSON
-            $data = $response->json();
-            
-            // Asegúrate de que el array no esté vacío y contenga los clientes
-            if (isset($data['data']) && is_array($data['data'])) {
-                $clientes = $data['data'];
-            } else {
-                // Si no hay clientes, puedes inicializar como un array vacío
-                $clientes = [];
-            }
-    
-            return view('Clientes', compact('clientes'));
+            return view('clientes', compact('clientes'));
         } else {
             return back()->withErrors(['error' => 'No se pudo obtener la lista de los clientes.']);
         }
     }
-
     
 
     public function crear(Request $request)
@@ -56,9 +43,10 @@ class ClientesController extends Controller
             return response()->json(['error' => 'Hubo un problema al crear el Cliente.'], 500);
         }
     }
+    
     public function actualizar(Request $request, $id)
     {
-        $response = Http::put('http://localhost:3000//clientes/:id', [
+        $response = Http::put('http://localhost:3000/clientes/' . $id, [
             'cod_persona' => $id,
             'nombres' => $request->input('nombres'),
             'apellidos' => $request->input('apellidos'),
@@ -69,9 +57,6 @@ class ClientesController extends Controller
             'estado_civil' => $request->input('estado_civil'),
             'genero' => $request->input('genero'),
             'nacionalidad' => $request->input('nacionalidad'),
-            'nombre_usuario' => $request->input('nombre_usuario'),
-            'contrasena' => $request->input('contrasena'),
-            'email' => $request->input('email'),
             'historial_compras' => $request->input('historial_compras'),
             'estado' => $request->input('estado'),
             'edad' => $request->input('edad'),
@@ -81,5 +66,5 @@ class ClientesController extends Controller
         } else {
             return response()->json(['error' => 'Hubo un error al actualizar el Cliente.'], 500);
         }
-    }
+    }   
 }

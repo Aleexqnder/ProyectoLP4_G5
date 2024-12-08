@@ -1,77 +1,71 @@
 @extends('adminlte::page')
-
 @section('content_header')
-    <h1>Gestión de Reparaciones</h1>
+    <h1>Gestión de Usuarios</h1>
 @stop
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card shadow-lg border-0">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">Listado de Reparaciones</h5>
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Listado de Usuarios</h5>
+                    <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoUsuarioModal">
+                        <i class="fas fa-plus-circle"></i> Agregar
+                    </button>
                 </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
-                        <table id="reparaciones-table" class="table table-hover table-striped">
-                            <thead class="bg-primary text-white">
+                        <table id="usuarios-table" class="table table-hover table-dark">
+                            <thead class="bg-green text-white">
                                 <tr>
-                                    <th>ID Reparación</th>
-                                    <th>Código Vehículo</th>
-                                    <th>Descripción</th>
-                                    <th>Fecha Reparación</th>
-                                    <th>Costo</th>
+                                    <th>Codigo de Usuario</th>
+                                    <th>Codigo de Persona</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Contraseña</th>
+                                    <th>Email</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($reparaciones as $reparacion)
+                                @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $reparacion["cod_reparacion"] }}</td>
-                                    <td>{{ $reparacion["cod_vehiculo"] }}</td>
-                                    <td>{{ $reparacion["descripcion"] }}</td>
-                                    <td>{{ $reparacion["fecha_reparacion"] }}</td>
-                                    <td>{{ $reparacion["costo"] }}</td>
+                                    <td>{{ $usuario["cod_usuario"] }}</td>
+                                    <td>{{ $usuario["cod_persona"] }}</td>
+                                    <td>{{ $usuario["nombre_usuario"] }}</td>
+                                    <td>{{ $usuario["contrasena"] }}</td>
+                                    <td>{{ $usuario["email"] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReparacionModal{{ $reparacion['cod_reparacion'] }}">
+                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarUsuarioModal{{ $usuario['cod_usuario'] }}">
                                             <i class="fas fa-edit"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevaReparacionModal">
-                                            <i class="fas fa-plus-circle"></i> Agregar
                                         </button>
                                     </td>
                                 </tr>
-
-                                <!-- Modal de editar reparación -->
-                                <div class="modal fade" id="editarReparacionModal{{ $reparacion['cod_reparacion'] }}" tabindex="-1" role="dialog">
+                                <!-- Modal para editar usuario -->
+                                <div class="modal fade" id="editarUsuarioModal{{ $usuario['cod_usuario'] }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header bg-warning text-dark">
-                                                <h5 class="modal-title">Editar Reparación</h5>
+                                                <h5 class="modal-title">Editar Usuario</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="editar-reparacion-form" data-id="{{ $reparacion['cod_reparacion'] }}">
+                                                <form class="editar-usuario-form" data-id="{{ $usuario['cod_usuario'] }}">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group">
-                                                        <label for="cod_vehiculo">Código Vehículo:</label>
-                                                        <input type="text" class="form-control" name="cod_vehiculo" value="{{ $reparacion['cod_vehiculo'] }}" required>
+                                                        <label for="nombre_usuario">Nombre de Usuario:</label>
+                                                        <input type="text" class="form-control" name="nombre_usuario" value="{{ $usuario['nombre_usuario'] }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="descripcion">Descripción:</label>
-                                                        <input type="text" class="form-control" name="descripcion" value="{{ $reparacion['descripcion'] }}" required>
+                                                        <label for="contrasena">Contraseña:</label>
+                                                        <input type="password" class="form-control" name="contrasena" value="{{ $usuario['contrasena'] }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="fecha_reparacion">Fecha Reparación:</label>
-                                                        <input type="date" class="form-control" name="fecha_reparacion" value="{{ $reparacion['fecha_reparacion'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="costo">Costo:</label>
-                                                        <input type="number" class="form-control" name="costo" value="{{ $reparacion['costo'] }}" required>
+                                                        <label for="email">Email:</label>
+                                                        <input type="email" class="form-control" name="email" value="{{ $usuario['email'] }}" required>
                                                     </div>
                                                     <button type="submit" class="btn btn-warning btn-block">Guardar</button>
                                                 </form>
@@ -82,47 +76,47 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                                @endforeach    
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer text-center bg-dark text-white">
-                    <p>© Gestión de Reparaciones</p>
+                    <p>© Gestión de Usuarios</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal de nueva reparación -->
-<div class="modal fade" id="nuevaReparacionModal" tabindex="-1" role="dialog">
+<!-- Modal para agregar nuevo usuario -->
+<div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Agregar Nueva Reparación</h5>
+                <h5 class="modal-title">Agregar Nuevo Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="nueva-reparacion-form">
+                <form id="nuevo-usuario-form">
                     @csrf
                     <div class="form-group">
-                        <label for="cod_vehiculo">Código Vehículo:</label>
-                        <input type="text" class="form-control" name="cod_vehiculo" required>
+                        <label for="cod_persona">Código de Persona:</label>
+                        <input type="text" class="form-control" name="cod_persona" required>
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" class="form-control" name="descripcion" required>
+                        <label for="nombre_usuario">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" name="nombre_usuario" required>
                     </div>
                     <div class="form-group">
-                        <label for="fecha_reparacion">Fecha Reparación:</label>
-                        <input type="date" class="form-control" name="fecha_reparacion" required>
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" class="form-control" name="contrasena" required>
                     </div>
                     <div class="form-group">
-                        <label for="costo">Costo:</label>
-                        <input type="number" class="form-control" name="costo" required>
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </form>
@@ -135,7 +129,6 @@
 </div>
 @endsection
 
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -144,28 +137,34 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
-        $('#reparaciones-table').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar:",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
+        // Configuración de DataTable
+        $('#usuarios-table').DataTable({
+            language: {
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                zeroRecords: "No se encontraron resultados",
+                info: "Mostrando página _PAGE_ de _PAGES_",
+                infoEmpty: "No hay registros disponibles",
+                infoFiltered: "(filtrado de _MAX_ registros totales)",
+                search: "Buscar:",
+                paginate: {
+                    first: "<button class='btn btn-sm btn-primary pagination-btn'>Primero</button>",
+                    last: "<button class='btn btn-sm btn-primary pagination-btn'>Último</button>",
+                    next: "<button class='btn btn-sm btn-primary pagination-btn'>Siguiente</button>",
+                    previous: "<button class='btn btn-sm btn-primary pagination-btn'>Anterior</button>"
                 }
-            }
+            },
+            dom: '<"top"f>rt<"bottom"p><"clear">',
+            pagingType: "simple",
+            stateSave: true
         });
-        // AJAX para agregar nueva reparación
-        $('#nueva-reparacion-form').on('submit', function(event) {
+
+        // Funciones AJAX
+        // AJAX para agregar nuevo usuario
+        $('#nuevo-usuario-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reparaciones.crear") }}',
+                url: '{{ route("usuarios.crear") }}',
                 method: 'POST',
                 data: formData,
                 success: function(response) {
@@ -194,13 +193,14 @@
                 }
             });
         });
-        // AJAX para editar reparación
-        $('.editar-reparacion-form').on('submit', function(event) {
+
+        // AJAX para editar usuario
+        $('.editar-usuario-form').on('submit', function(event) {
             event.preventDefault();
-            var reparacionId = $(this).data('id');
+            var usuarioId = $(this).data('id');
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reparaciones.actualizar", "") }}/' + reparacionId,
+                url: '{{ route("usuarios.actualizar", "") }}/' + usuarioId,
                 method: 'PUT',
                 data: formData,
                 success: function(response) {
@@ -231,4 +231,10 @@
         });
     });
 </script>
+
+<style>
+    .pagination-btn {
+        margin-right: 10px; 
+    }
+</style>
 @endsection

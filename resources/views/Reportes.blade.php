@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Gestión de Reparaciones</h1>
+    <h1>Gestión de Reportes</h1>
 @stop
 
 @section('content')
@@ -10,69 +10,62 @@
         <div class="col-md-10">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">Listado de Reparaciones</h5>
+                    <h5 class="mb-0">Listado de Reportes</h5>
                 </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
-                        <table id="reparaciones-table" class="table table-hover table-striped">
+                        <table id="reportes-table" class="table table-hover table-striped">
                             <thead class="bg-primary text-white">
                                 <tr>
-                                    <th>ID Reparación</th>
-                                    <th>Código Vehículo</th>
+                                    <th>ID Reporte</th>
+                                    <th>Código Reporte</th>
                                     <th>Descripción</th>
-                                    <th>Fecha Reparación</th>
-                                    <th>Costo</th>
+                                    <th>Fecha Reporte</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($reparaciones as $reparacion)
+                                @foreach($reportes as $reporte)
                                 <tr>
-                                    <td>{{ $reparacion["cod_reparacion"] }}</td>
-                                    <td>{{ $reparacion["cod_vehiculo"] }}</td>
-                                    <td>{{ $reparacion["descripcion"] }}</td>
-                                    <td>{{ $reparacion["fecha_reparacion"] }}</td>
-                                    <td>{{ $reparacion["costo"] }}</td>
+                                    <td>{{ $reporte["cod_reporte"] }}</td>
+                                    <td>{{ $reporte["des_reporte"] }}</td>
+                                    <td>{{ $reporte["fecha_reporte"] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReparacionModal{{ $reparacion['cod_reparacion'] }}">
+                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReportesModal{{ $reporte['cod_reporte'] }}">
                                             <i class="fas fa-edit"></i> Editar
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevaReparacionModal">
+                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#NuevoReportesModal">
                                             <i class="fas fa-plus-circle"></i> Agregar
                                         </button>
                                     </td>
                                 </tr>
-
-                                <!-- Modal de editar reparación -->
-                                <div class="modal fade" id="editarReparacionModal{{ $reparacion['cod_reparacion'] }}" tabindex="-1" role="dialog">
+                                <!-- Modal de editar reporte -->
+                                <div class="modal fade" id="editarReportesModal{{ $reporte['cod_reporte'] }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header bg-warning text-dark">
-                                                <h5 class="modal-title">Editar Reparación</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <h5 class="modal-title">Editar Reporte</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="editar-reparacion-form" data-id="{{ $reparacion['cod_reparacion'] }}">
+                                                <form class="editar-reporte-form" data-id="{{ $reporte['cod_reporte'] }}">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group">
-                                                        <label for="cod_vehiculo">Código Vehículo:</label>
-                                                        <input type="text" class="form-control" name="cod_vehiculo" value="{{ $reparacion['cod_vehiculo'] }}" required>
+                                                        <label for="cod_reporte">Código Reporte:</label>
+                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reporte['cod_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="descripcion">Descripción:</label>
-                                                        <input type="text" class="form-control" name="descripcion" value="{{ $reparacion['descripcion'] }}" required>
+                                                        <label for="des_reporte">Descripción Reporte:</label>
+                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $reporte['des_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="fecha_reparacion">Fecha Reparación:</label>
-                                                        <input type="date" class="form-control" name="fecha_reparacion" value="{{ $reparacion['fecha_reparacion'] }}" required>
+                                                        <label for="fecha_reporte">Fecha Reporte:</label>
+                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reporte['fecha_reporte'] }}" required>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="costo">Costo:</label>
-                                                        <input type="number" class="form-control" name="costo" value="{{ $reparacion['costo'] }}" required>
-                                                    </div>
+
                                                     <button type="submit" class="btn btn-warning btn-block">Guardar</button>
                                                 </form>
                                             </div>
@@ -88,41 +81,36 @@
                     </div>
                 </div>
                 <div class="card-footer text-center bg-dark text-white">
-                    <p>© Gestión de Reparaciones</p>
+                    <p>© Gestión de Reportes</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal de nueva reparación -->
-<div class="modal fade" id="nuevaReparacionModal" tabindex="-1" role="dialog">
+<!-- Modal de nuevo reporte -->
+<div class="modal fade" id="NuevoReportesModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Agregar Nueva Reparación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">Agregar Nuevo Reporte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="nueva-reparacion-form">
+                <form id="nuevo-reporte-form">
                     @csrf
                     <div class="form-group">
-                        <label for="cod_vehiculo">Código Vehículo:</label>
-                        <input type="text" class="form-control" name="cod_vehiculo" required>
+                        <label for="cod_reporte">Código Reporte:</label>
+                        <input type="text" class="form-control" name="cod_reporte" required>
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" class="form-control" name="descripcion" required>
+                        <label for="des_reporte">Descripción:</label>
+                        <input type="text" class="form-control" name="des_reporte" required>
                     </div>
                     <div class="form-group">
-                        <label for="fecha_reparacion">Fecha Reparación:</label>
-                        <input type="date" class="form-control" name="fecha_reparacion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="costo">Costo:</label>
-                        <input type="number" class="form-control" name="costo" required>
+                        <label for="fecha_reporte">Fecha Reparación:</label>
+                        <input type="date" class="form-control" name="fecha_reporte" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                 </form>
@@ -135,7 +123,6 @@
 </div>
 @endsection
 
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -144,7 +131,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
-        $('#reparaciones-table').DataTable({
+        $('#reportes-table').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por página",
                 "zeroRecords": "No se encontraron resultados",
@@ -160,12 +147,12 @@
                 }
             }
         });
-        // AJAX para agregar nueva reparación
-        $('#nueva-reparacion-form').on('submit', function(event) {
+        // AJAX para agregar nuevo reporte
+        $('#nuevo-reporte-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reparaciones.crear") }}',
+                url: '{{ route("reportes.crear") }}',
                 method: 'POST',
                 data: formData,
                 success: function(response) {
@@ -194,13 +181,13 @@
                 }
             });
         });
-        // AJAX para editar reparación
-        $('.editar-reparacion-form').on('submit', function(event) {
+        // AJAX para editar reporte
+        $('.editar-reporte-form').on('submit', function(event) {
             event.preventDefault();
-            var reparacionId = $(this).data('id');
+            var reporteId = $(this).data('id');
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reparaciones.actualizar", "") }}/' + reparacionId,
+                url: '{{ route("reportes.actualizar", "") }}/' + reporteId,
                 method: 'PUT',
                 data: formData,
                 success: function(response) {
