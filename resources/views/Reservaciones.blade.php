@@ -25,7 +25,19 @@
                                 </tr>
                             </thead>
                             <tbody id="reservaciones-tbody">
-                                <!-- Se llenará dinámicamente con el lenguaje JavaScript -->
+                                @foreach($reservaciones as $reservacion)
+                                <tr>
+                                    <td>{{ $reservacion['cod_reservacion'] }}</td>
+                                    <td>{{ $reservacion['cod_persona'] }}</td>
+                                    <td>{{ $reservacion['cod_vehiculo'] }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($reservacion['fecha_reservacion'])->format('Y-m-d') }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-warning shadow editar-reservacion" data-id="{{ $reservacion['cod_reservacion'] }}" data-toggle="modal" data-target="#nuevaReservacionModal">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -94,7 +106,7 @@
                             <td>${reservacion.cod_reservacion}</td>
                             <td>${reservacion.cod_persona}</td>
                             <td>${reservacion.cod_vehiculo}</td>
-                            <td>${reservacion.fecha_reservacion}</td>
+                            <td>${new Date(reservacion.fecha_reservacion).toLocaleDateString()}</td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-warning shadow editar-reservacion" data-id="${reservacion.cod_reservacion}" data-toggle="modal" data-target="#nuevaReservacionModal">
                                     <i class="fas fa-edit"></i> Editar
@@ -149,7 +161,7 @@
             $.get(`/reservaciones/${reservacionId}`, function(reservacion) {
                 $('input[name="cod_persona"]').val(reservacion.cod_persona);
                 $('input[name="cod_vehiculo"]').val(reservacion.cod_vehiculo);
-                $('input[name="fecha_reservacion"]').val(reservacion.fecha_reservacion);
+                $('input[name="fecha_reservacion"]').val(new Date(reservacion.fecha_reservacion).toISOString().split('T')[0]);
                 $('#nueva-reservacion-form').off('submit').on('submit', function(event) {
                     event.preventDefault();
                     const formData = $(this).serialize();

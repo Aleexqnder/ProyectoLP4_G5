@@ -40,7 +40,7 @@ class ReservacionesController extends Controller
     // Método para actualizar una reservación existente
     public function actualizar(Request $request, $id)
     {
-        $response = Http::put("http://localhost:3000/reservaciones/$id", [
+        $response = Http::put('http://localhost:3000/reservaciones/' . $id, [
             'cod_persona' => $request->input('cod_persona'),
             'cod_vehiculo' => $request->input('cod_vehiculo'),
             'fecha_reservacion' => $request->input('fecha_reservacion'),
@@ -49,7 +49,7 @@ class ReservacionesController extends Controller
         if ($response->successful()) {
             return response()->json(['success' => 'Reservación actualizada correctamente.']);
         } else {
-            return response()->json(['error' => 'Hubo un error al actualizar la reservación.'], 500);
+            return response()->json(['error' => 'Hubo un problema al actualizar la reservación.'], 500);
         }
     }
 }
