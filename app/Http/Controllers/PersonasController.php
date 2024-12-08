@@ -1,25 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PersonasController extends Controller
 {
-    /**
-     * Muestra la lista de empleados.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function listar()
     {
-        // Si necesitas pasar datos a la vista, puedes hacerlo aquí.
-        // Por ejemplo:
-        // $empleados = Empleado::all();
-        // return view('Empleado.Administrador', compact('empleados'));
-
-        return view('Personas'); // Asegúrate de que la vista exista en resources/views/Administrador.blade.php
+        $response = Http::get('http://localhost:3000/personas');
+        $personas = $response->json();
+        if ($response->successful()) {
+            return view('personas', compact('personas'));
+        } else {
+            return back()->withErrors(['error' => 'No se pudo obtener la lista de las personas.']);
+        }
     }
-
-    // Puedes añadir otros métodos como create, store, show, edit, update, destroy según tus necesidades.
 }

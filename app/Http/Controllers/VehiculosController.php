@@ -53,5 +53,3 @@ class VehiculosController extends Controller
         }
     }
 }
-
-

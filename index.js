@@ -33,31 +33,47 @@ const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
 app.use(bodyParser.json());
 
-const mysqlConnection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    multipleStatements: true,
-    port: process.env.DB_PORT
-});
+let mysqlConnection;
 
-mysqlConnection.connect((err) => {
-    if (!err) {
-        console.log('Conexión exitosa a la base de datos.');
-    } else {
-        console.log('Error al conectarse a la base de datos.');
-    }
-});
+const connectToDatabase = () => {
+    mysqlConnection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        multipleStatements: true,
+        port: process.env.DB_PORT
+    });
+
+    mysqlConnection.connect((err) => {
+        if (!err) {
+            console.log('Conexión exitosa a la base de datos.');
+        } else {
+            console.log('Error al conectarse a la base de datos:', err);
+            setTimeout(connectToDatabase, 1000); // Reintentar en 1 segundos
+        }
+    });
+
+    mysqlConnection.on('error', (err) => {
+        console.log('Error de conexión a la base de datos:', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            connectToDatabase();
+        } else {
+            throw err;
+        }
+    });
+};
+
+connectToDatabase();
 
 app.listen(3000, () => console.log('Servidor corriendo en el puerto 3000.'));
-
-
 
 // Cierre del bloque general de las conexiones.
 
@@ -105,7 +121,8 @@ app.get('/clientes', (req, res) => {
 app.get('/usuarios', (req, res) => {
     mysqlConnection.query('CALL SEL_USUARIOS()', (err, rows) => {
         if (!err) {
-            res.status(200).json(rows[0]); // Retorna todos los usuarios
+            console.log(rows[0]); 
+            res.status(200).json(rows[0]); 
         } else {
             console.log(err);
             res.status(500).send('Error al obtener la lista de usuarios');
@@ -113,6 +130,30 @@ app.get('/usuarios', (req, res) => {
     });
 });
 
+// POST login
+// POST login
+app.post('/login', (req, res) => {
+    let Email = req.body.Email.trim();
+    let contrasena = req.body.contrasena.trim();
+
+    console.log('Datos recibidos en el servidor:', req.body);
+
+    const sqlQuery = 'SELECT * FROM usuarios WHERE Email = ? AND contrasena = ?';
+    mysqlConnection.query(sqlQuery, [Email, contrasena], (err, rows) => {
+        if (!err) {
+            console.log('Resultado de la consulta:', rows);
+            if (rows.length > 0) {
+                let user = rows[0];
+                res.status(200).json({ success: true, user: user });
+            } else {
+                res.status(401).json({ success: false, message: 'Las credenciales no coinciden con nuestros registros.' });
+            }
+        } else {
+            console.error('Error al consultar la base de datos:', err);
+            res.status(500).send('Error al consultar la base de datos');
+        }
+    });
+});
 
 // POST a la tabla "Clientes"
 app.post('/clientes', (req, res) => {
@@ -229,22 +270,22 @@ app.post('/empleados', (req, res) => {
         CALL INS_PERSONA_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
-        empleado.NOMBRES,
-        empleado.APELLIDOS,
-        empleado.DNI,
-        empleado.TELEFONO,
-        empleado.DIRECCION,
-        empleado.FECHA_NACIMIENTO,
-        empleado.ESTADO_CIVIL,
-        empleado.GENERO,
-        empleado.NACIONALIDAD,
-        empleado.NOMBRE_USUARIO,
-        empleado.CONTRASENA,
-        empleado.EMAIL,
-        empleado.SALARIO,
-        empleado.PUESTO,
-        empleado.FECHA_CONTRATACION,
-        empleado.EDAD 
+        empleado['nombres'],
+        empleado['apellidos'],
+        empleado['dni'],
+        empleado['telefono'],
+        empleado['direccion'],
+        empleado['fecha_nacimiento'],
+        empleado['estado_civil'],
+        empleado['genero'],
+        empleado['nacionalidad'],
+        empleado['nombre_usuario'],
+        empleado['contrasena'],
+        empleado['email'],
+        empleado['salario'],
+        empleado['puesto'],
+        empleado['fecha_contratacion'],
+        empleado['edad']
     ], (err) => {
         if (!err) {
             res.status(201).send("Empleado ingresado correctamente.");
@@ -274,6 +315,7 @@ app.put('/usuarios/:cod_usuario', (req, res) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Error al actualizar el usuario');
+            
         }
         res.status(200).send('Usuario actualizado correctamente');
     });
@@ -282,11 +324,13 @@ app.put('/usuarios/:cod_usuario', (req, res) => {
 
 // PUT a la tabla "Clientes"
 app.put('/clientes/:id', (req, res) => {
+    console.log(req.body); // Depuración
+    console.log('Datos recibidos:', req.body);
     const cod_persona = req.params.id;
     const cliente = req.body;
 
     const sqlquery = `
-        CALL UPD_CLIENTE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        CALL UPD_CLIENTE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
         cod_persona,
@@ -299,9 +343,6 @@ app.put('/clientes/:id', (req, res) => {
         cliente.estado_civil,
         cliente.genero,
         cliente.nacionalidad,
-        cliente.nombre_usuario,
-        cliente.contrasena,
-        cliente.email,
         cliente.historial_compras,
         cliente.estado,
         cliente.edad
@@ -318,16 +359,17 @@ app.put('/clientes/:id', (req, res) => {
 
 // PUT a la tabla "Empleados"
 app.put('/empleados/:id', (req, res) => {
-    const cod_empleado = req.params.id;
+    console.log(req.body); // Depuración
+    console.log('Datos recibidos:', req.body);
+    const cod_persona = req.params.id;
     const empleado = req.body;
+
     const sqlquery = `
-        CALL UPD_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        CALL UPD_EMPLEADO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(sqlquery, [
-        cod_empleado,
-        empleado.salario,           
-        empleado.puesto,           
-        empleado.nombres,
+        cod_persona,
+        empleado.nombres, 
         empleado.apellidos,
         empleado.dni,
         empleado.telefono,
@@ -336,11 +378,10 @@ app.put('/empleados/:id', (req, res) => {
         empleado.estado_civil,
         empleado.genero,
         empleado.nacionalidad,
-        empleado.nombre_usuario,
-        empleado.contrasena,
-        empleado.email,
-        empleado.fecha_contratacion,  
-        empleado.edad
+        empleado.edad,
+        empleado.salario,
+        empleado.puesto,
+        empleado.fecha_contratacion
     ], (err) => {
         if (!err) {
             res.status(200).send("Empleado actualizado correctamente.");
@@ -351,17 +392,60 @@ app.put('/empleados/:id', (req, res) => {
     });
 });
 
+app.post('/usuarios', (req, res) => {
+    const usuario = req.body;
+
+    const sqlquery = `
+        CALL INS_USUARIOS(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(sqlquery, [
+        usuario.cod_persona,
+        usuario.nombre_usuario,
+        usuario.contrasena,
+        usuario.email
+    ], (err) => {
+        if (!err) {
+            res.status(200).send("Usuario creado con éxito.");
+        } else {
+            console.log(err);
+            res.status(500).send('Hubo un problema al crear el Usuario.');
+        }
+    });
+});
+
+app.put('/usuarios/:id', (req, res) => {
+    const cod_usuario = req.params.id;
+    const usuario = req.body;
+
+    const sqlquery = `
+        CALL UPD_USUARIO(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(sqlquery, [
+        cod_usuario,
+        usuario.nombre_usuario,
+        usuario.contrasena,
+        usuario.email
+    ], (err) => {
+        if (!err) {
+            res.status(200).send("Usuario actualizado con éxito.");
+        } else {
+            console.log(err);
+            res.status(500).send('Hubo un problema al actualizar el Usuario.');
+        }
+    });
+});
+
 
 //                                  20191002726 Edwin Alexander Mejía Molina
 
 
 // GET de cotizaciones
 app.get('/cotizaciones', (req, res) => {
-    mysqlConnection.query('CALL SEL_COTIZACION(NULL)', (err, rows) => {
+    mysqlConnection.query('CALL SEL_COTIZACION()', (err, rows) => {
         if (!err) {
-            res.status(200).json(rows[0]); 
+            res.status(200).json(rows[0]); // Enviar los resultados de la consulta en formato JSON
         } else {
-            console.log(err);
+            console.error(err); // Registrar el error en la consola
             res.status(500).send('Error al obtener la lista de cotizaciones');
         }
     });
@@ -405,6 +489,8 @@ app.put('/cotizaciones/:id', (req, res) => {
     const cod_cotizacion = req.params.id;
     const cotizacion = req.body; 
 
+    console.log("Datos recibidos para actualizar:", cotizacion); // Depuración
+
     const sqlquery = `
         CALL UPD_COTIZACION(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
@@ -413,7 +499,7 @@ app.put('/cotizaciones/:id', (req, res) => {
         cod_cotizacion,
         cotizacion.cod_persona,
         cotizacion.fecha,
-        cotizacion.cod_detalle,
+        cotizacion.cod_detalle, 
         cotizacion.descripcion,
         cotizacion.monto,
         cotizacion.cod_cliente,
@@ -421,17 +507,16 @@ app.put('/cotizaciones/:id', (req, res) => {
         cotizacion.cantidad,
         cotizacion.tipo_producto,
         cotizacion.estado_producto
-    ], (err) => {
+    ], (err, results) => {
         if (err) {
             console.error("Error al actualizar la cotización:", err); // Muestra el error si ocurre
             res.status(500).send('Error al actualizar la cotización');
         } else {
-            console.log("Cotización actualizada correctamente"); // Muestra el éxito de la operación
+            console.log("Cotización actualizada correctamente:", results); // Depuración
             res.status(200).send("Cotización actualizada correctamente.");
         }
     });
 });
-
 
 //                                  20211001469 Kevin David Miguel Ávila
 //                                  20201003997 André Alessandro Lagos Cano
@@ -596,6 +681,7 @@ app.post('/REPARACIONES', (req, res) => {
         }
     );
 });
+
 
 // PUT Reparaciones
 app.put('/REPARACIONES', (req, res) => {

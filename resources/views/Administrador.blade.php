@@ -1,137 +1,203 @@
 @extends('adminlte::page')
+
 @section('title', 'Administrador')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-  </head>
-<body>
 @section('content_header')
-<div class="container">
-  <h2>Administrador
-      <button type ="Button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert-administrador"> 
-        Insertar
-      </button>
-  </h2>
-    
-@stop
-@section('content')
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class ="card-tittle">Bienvenido </h3>
-        </div>
-      </div>  
-    </div> 
-  </div> 
-</div>  
-</div>
-
-<!-- /.modal-Insert -->
-<div class="modal fade" id="modal-insert-administrador">
-    <div class="modal-dialog">
-        <div class="modal-content bg-default">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Insertar Datos</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-            </div>
-            <form action="{{url('/Administrador')}}" method="POST">
-            {{ csrf_field() }}
-            <div class="modal-body">
-              <div class="from-group">  
-                      <label for=""> Codigo Administrador </label>
-                      <input type="text" name="Cod_Administrador">
-                      <br>
-                      <label for=""> Cod_Tipo_Usuario </label>
-                      <input type="text" name="Cod_Tipo_Usuario">
-                      <br>
-                      <label for=""> Nombre del Admin </label>
-                      <input type="text" name="Nombre_Admin">
-                      <br>
-                      <label for=""> Usuario </label>
-                      <input type="text" name="Usr_Registro"> 
-                      <br>
-              </div>
-            </div>
-          
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            </div>
-         </from>
-        </div>
-      <!-- /.modal-content -->
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Bienvenido al Panel de Administrador</h1>
+        <img src="{{ asset('build/assets/img/LogoPNG.png') }}" alt="Logo" class="logo-clase" style="height: 350px;">
     </div>
-    <!-- /.modal-dialog -->
-</div>
+@stop
+
+@section('content')
+    <div class="row">
+        <!-- Gráfica de Ventas -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Gráfico de Ventas</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="ventasChart" style="height:250px; min-height:250px"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Calendario -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Calendario de Eventos</h3>
+                </div>
+                <div class="card-body">
+                    <div id="calendario"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Widgets Adicionales -->
+    <div class="row mt-4">
+        <!-- Widget 1: Usuarios Registrados -->
+        <div class="col-md-3">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>150</h3>
+                    <p>Usuarios Registrados</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Widget 2: Ventas Totales -->
+        <div class="col-md-3">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>$53,000</h3>
+                    <p>Ventas Totales</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Widget 3: Nuevos Pedidos -->
+        <div class="col-md-3">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>44</h3>
+                    <p>Nuevos Pedidos</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Widget 4: Comentarios -->
+        <div class="col-md-3">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>65</h3>
+                    <p>Comentarios</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfica de Rendimiento -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Gráfico de Rendimiento</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="rendimientoChart" style="height:250px; min-height:250px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('css')
+    <!-- CSS de FullCalendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <!-- FontAwesome para los íconos de los widgets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 @stop
 
 @section('js')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchAdministradores();
-    });
+    <!-- JS de Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- JS de FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js"></script>
+    <!-- Script para las Gráficas -->
+    <script>
+        // Gráfico de Ventas
+        var ctxVentas = document.getElementById('ventasChart').getContext('2d');
+        var ventasChart = new Chart(ctxVentas, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                datasets: [{
+                    label: 'Ventas',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: '#00c0ef',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
 
-    function fetchAdministradores() {
-        fetch('http://localhost:3000/Clientes') // Asegúrate de usar la URL correcta
-            .then(response => response.json())
-            .then(data => {
-                console.log('Administradores:', data);
-                const tbody = document.querySelector('#administradores-table tbody');
-                tbody.innerHTML = ''; // Limpiar contenido previo
-
-                data.forEach(infor => {
-                    const tr = document.createElement('tr');
-
-                    tr.innerHTML = `
-                        <td>${infor.cod_persona}</td>
-                        <td>${infor.nombres}</td>
-                        <td>${infor.apellidos}</td>
-                        <td>${infor.dni}</td>
-                        <td>${infor.telefono}</td>
-                        <td>${infor.direccion}</td>
-                        <td>${infor.edad}</td>
-                        <td>${formatDate(infor.fecha_nacimiento)}</td>
-                        <td>${infor.estado_civil}</td>
-                        <td>${infor.genero}</td>
-                        <td>${infor.nacionalidad}</td>
-                        <td>${infor.cod_empleado}</td>
-                        <td>${formatDate(infor.fecha_contratacion)}</td>
-                        <td>${infor.salario}</td>
-                        <td>${infor.puesto}</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-reportes-${infor.cod_persona}">
-                                Editar
-                            </button>
-                            <form action="/administrador/destroy/${infor.cod_persona}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Borrar</button>
-                            </form>
-                        </td>
-                    `;
-                    
-                    tbody.appendChild(tr);
-                });
-            })
-            .catch(error => {
-                console.error('Error al obtener los administradores:', error);
+        // Gráfico de Rendimiento
+        var ctxRendimiento = document.getElementById('rendimientoChart').getContext('2d');
+        var rendimientoChart = new Chart(ctxRendimiento, {
+            type: 'line',
+            data: {
+                labels: ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                datasets: [{
+                    label: 'Rendimiento',
+                    data: [30, 25, 35, 40, 20, 45],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: '#ff6384',
+                    borderWidth: 2,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    </script>
+    <!-- Script para el Calendario -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendario');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'es',
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'Cita de Mantenimiento',
+                        start: '2023-10-10',
+                        description: 'Revisión general del vehículo.'
+                    },
+                    {
+                        title: 'Entrega de Vehículo',
+                        start: '2023-10-15',
+                        description: 'Entrega del vehículo al cliente.'
+                    },
+                    // Agrega más eventos aquí
+                ],
+                eventClick: function(info) {
+                    alert(info.event.title + '\n' + (info.event.extendedProps.description || ''));
+                }
             });
-    }
-
-    // Función para formatear fechas (opcional)
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    }
-</script>
+            calendar.render();
+        });
+    </script>
 @stop
-
-</body>
-</html>

@@ -321,32 +321,33 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Dashboard',
+            'route' => 'dashboard.index',
         ],
+
         [
             'text' => 'Modulo Personas',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
                     'text' => 'Personas',
-                    'route' => 'personas.index',
+                    'route' => 'personas.listar',
                 ],
+                
                 [
                     'text' => 'Usuarios',
-                    'route' => 'usuarios.index',
+                    'route' => 'usuarios.listar',
                 ],
+
                 [
                     'text' => 'Clientes',
-                    'route' => 'clientes.index',
+                    'route' => 'clientes.listar',
                 ],
                 [
                     'text' => 'Empleados',
-                    'route' => 'empleados.index',
+                    'route' => 'empleados.listar',
                 ],
+                
             ],
         ],
 
@@ -365,6 +366,40 @@ return [
             ],
         ],
 
+        [
+            'text' => 'Modulo Cotizaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Cotizaciones',
+                    'route' => 'cotizaciones.listar',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Modulo Reportes',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reportes',
+                    'route' => 'reportes.listar',
+                ],
+
+            ],
+        ],
+
+
+        [
+            'text' => 'Modulo Reservaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reservaciones',
+                    'route' => 'reservaciones.listar',
+                ],
+            ],
+        ],
 
     ],
 

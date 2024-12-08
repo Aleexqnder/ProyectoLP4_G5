@@ -7,60 +7,44 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Proyecto de Lenguaje de Programación IV - Sistema de información web móvil para la gestión de talleres de mecánica.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Descripción del Proyecto
+Este proyecto tiene como objetivo desarrollar un sistema de gestión para la administración de un Sistema de información web móvil para la gestión de talleres de mecánica utilizando tecnologías de bases de datos y APIs. Se han implementado procedimientos almacenados para optimizar las operaciones de actualización y gestión de datos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Estructura del Proyecto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Base de Datos**:  
+  El sistema utiliza una base de datos relacional bien estructurada que almacena información sobre clientes, reparaciones, cotizaciones, reservaciones, y reportes del taller de mecánica. Se emplean claves foráneas y relaciones para garantizar la integridad referencial.
 
-## Learning Laravel
+- **Procedimientos Almacenados**:  
+  Desarrollamos procedimientos almacenados en SQL para manejar operaciones complejas, como la actualización de múltiples registros, generación de reportes, y la creación automatizada de relaciones entre tablas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Backend**:  
+  El backend está construido con **Laravel**, un framework de PHP conocido por su potencia y facilidad de uso. Laravel gestiona las APIs, validación de datos, autenticación, y proporciona herramientas para la migración de base de datos y manejo de dependencias. Usa lo muy conocido de: Modelo - Vista - Controlador. Usando: Controladores y Blade's.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Frontend**:  
+  Se utiliza **AdminLTE**, una plantilla basada en Bootstrap para la creación de paneles administrativos responsivos.
+  
+- **APIs RESTful**:  
+  Se han desarrollado APIs para interactuar con los datos del sistema. Las APIs permiten realizar operaciones como (Crear, Leer, Actualizar), asegurando el acceso rápido y seguro a la información.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Dependencias y Paquetes Adicionales**:  
+  - `mysql`: Para la conexión y operaciones con la base de datos.  
+  - `express` y `body-parser`: Para APIs secundarias en caso de requerir extensiones adicionales en Node.js.  
+  - `AdminLTE`: Para gestionar vistas administrativas con estilos predefinidos.  
+  - `dotenv`: Para manejar variables de entorno de manera segura, como credenciales de base de datos y configuraciones sensibles.
 
-## Laravel Sponsors
+## Tecnologías Utilizadas
+- **MySQL**: Para la gestión de la base de datos.
+- **Node.js**: Para la implementación del servidor y las APIs.
+- **Express**: Framework para crear aplicaciones web en Node.js.
+- **Dotenv**: Para manejar variables de entorno de forma segura, permitiendo configurar credenciales y datos sensibles fuera del código fuente.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Miembros del Equipo
+- **Jasson Alexander Suazo Molina**
+- **Carlos Francisco Reyes López** 
+- **Yenifer Michell Fuentes Servellón** 
+- **André Alessandro Lagos Cano** 
+- **Edwin Alexander Mejía Molina** 
+- **Kevin David Miguel Ávila** 
