@@ -359,9 +359,47 @@ return [
                     'text' => 'Reparaciones',
                     'route' => 'reparaciones.listar',
                 ],
+                [
+                    'text' => 'Vehiculos',
+                    'route' => 'vehiculos.listar',
+                ],
             ],
         ],
 
+        [
+            'text' => 'Modulo Cotizaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Cotizaciones',
+                    'route' => 'cotizaciones.listar',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Modulo Reportes',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reportes',
+                    'route' => 'reportes.listar',
+                ],
+
+            ],
+        ],
+
+
+        [
+            'text' => 'Modulo Reservaciones',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Reservaciones',
+                    'route' => 'reservaciones.listar',
+                ],
+            ],
+        ],
 
     ],
 
