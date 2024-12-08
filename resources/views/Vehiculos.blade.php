@@ -12,6 +12,11 @@
                 <div class="card-header bg-dark text-white">
                     <h5 class="mb-0">Listado de Vehiculos</h5>
                 </div>
+                <div class="text-center my-3">
+                  <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoVehiculoModal">
+                    <i class="fas fa-plus-circle"></i> Agregar
+                  </button>
+                </div>
                 <div class="card-body bg-light">
                     <div class="table-responsive">
                         <table id="vehiculos-table" class="table table-hover table-striped">
@@ -37,9 +42,7 @@
                                         <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarVehiculoModal{{ $vehiculo['cod_vehiculo'] }}">
                                             <i class="fas fa-edit"></i> Editar
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoVehiculoModal">
-                                            <i class="fas fa-plus-circle"></i> Agregar
-                                        </button>
+                                        
                                     </td>
                                 </tr>
 
@@ -160,10 +163,12 @@
                 }
             }
         });
+
         // AJAX para agregar nuevo vehiculo
         $('#nuevo-vehiculo-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
+
             $.ajax({
                 url: '{{ route("vehiculos.crear") }}',
                 method: 'POST',
@@ -194,11 +199,13 @@
                 }
             });
         });
+
         // AJAX para editar vehiculo
         $('.editar-vehiculo-form').on('submit', function(event) {
             event.preventDefault();
             var vehiculoId = $(this).data('id');
             var formData = $(this).serialize();
+
             $.ajax({
                 url: '{{ route("vehiculos.actualizar", "") }}/' + vehiculoId,
                 method: 'PUT',
