@@ -1,7 +1,9 @@
 @extends('adminlte::page')
+
 @section('content_header')
     <h1>Gestión de Reportes</h1>
 @stop
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -23,46 +25,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($reportes as $reportes)
+                                @foreach($reportes as $reporte)
                                 <tr>
-                                @foreach($reportes as $reportes)
-                                    <td>{{ $reportes["cod_reporte"] }}</td>
-                                    <td>{{ $reportes["des_reporte"] }}</td>
-                                    <td>{{ $reportes["fecha_reporte"] }}</td>
+                                    <td>{{ $reporte["cod_reporte"] }}</td>
+                                    <td>{{ $reporte["des_reporte"] }}</td>
+                                    <td>{{ $reporte["fecha_reporte"] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReportesModal{{ $reportes['cod_reporte'] }}">
+                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReportesModal{{ $reporte['cod_reporte'] }}">
                                             <i class="fas fa-edit"></i> Editar
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#nuevoReportesModal">
+                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#NuevoReportesModal">
                                             <i class="fas fa-plus-circle"></i> Agregar
                                         </button>
                                     </td>
                                 </tr>
-                                <!-- Modal de editar reparación -->
-                                <div class="modal fade" id="editarReportesModal{{ $reportes['cod_reporte'] }}" tabindex="-1" role="dialog">
+                                <!-- Modal de editar reporte -->
+                                <div class="modal fade" id="editarReportesModal{{ $reporte['cod_reporte'] }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header bg-warning text-dark">
-                                                <h5 class="modal-title">Editar Reportes</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <h5 class="modal-title">Editar Reporte</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="editar-reporte-form" data-id="{{ $reportes['cod_reportes'] }}">
+                                                <form class="editar-reporte-form" data-id="{{ $reporte['cod_reporte'] }}">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group">
                                                         <label for="cod_reporte">Código Reporte:</label>
-                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reportes['cod_reporte'] }}" required>
+                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reporte['cod_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="des_reporte">Descripción Reporte:</label>
-                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $des_reporte['des_reporte'] }}" required>
+                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $reporte['des_reporte'] }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="fecha_reporte">Fecha Reporte:</label>
-                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reportes['fecha_reporte'] }}" required>
+                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reporte['fecha_reporte'] }}" required>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-warning btn-block">Guardar</button>
@@ -86,13 +87,13 @@
         </div>
     </div>
 </div>
-<!-- Modal de nueva reparación -->
+<!-- Modal de nuevo reporte -->
 <div class="modal fade" id="NuevoReportesModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title">Agregar Nuevo Reporte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -121,6 +122,7 @@
     </div>
 </div>
 @endsection
+
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -145,7 +147,7 @@
                 }
             }
         });
-        // AJAX para agregar nueva reparación
+        // AJAX para agregar nuevo reporte
         $('#nuevo-reporte-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -179,13 +181,13 @@
                 }
             });
         });
-        // AJAX para editar reparación
+        // AJAX para editar reporte
         $('.editar-reporte-form').on('submit', function(event) {
             event.preventDefault();
             var reporteId = $(this).data('id');
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reporte.actualizar", "") }}/' + reporteId,
+                url: '{{ route("reportes.actualizar", "") }}/' + reporteId,
                 method: 'PUT',
                 data: formData,
                 success: function(response) {
