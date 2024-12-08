@@ -17,11 +17,9 @@
                         <table id="reportes-table" class="table table-hover table-striped">
                             <thead class="bg-primary text-white">
                                 <tr>
-                                    <th>ID Reporte</th>
                                     <th>Código Reporte</th>
                                     <th>Descripción</th>
                                     <th>Fecha Reporte</th>
-                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,62 +29,31 @@
                                     <td>{{ $reporte["des_reporte"] }}</td>
                                     <td>{{ $reporte["fecha_reporte"] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-warning shadow" data-toggle="modal" data-target="#editarReportesModal{{ $reporte['cod_reporte'] }}">
-                                            <i class="fas fa-edit"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-primary shadow" data-toggle="modal" data-target="#NuevoReportesModal">
-                                            <i class="fas fa-plus-circle"></i> Agregar
-                                        </button>
-                                    </td>
+            <!-- Botón de editar -->
+            <button class="btn btn-warning btn-sm edit-button" 
+                data-id="{{ $reporte['cod_reporte'] }}" 
+                data-descripcion="{{ $reporte['des_reporte'] }}" 
+                data-fecha="{{ $reporte['fecha_reporte'] }}" 
+                data-toggle="modal" data-target="#EditarReportesModal">
+                <i class="fas fa-edit"></i> Editar
+            </button>
+        </td>
                                 </tr>
-                                <!-- Modal de editar reporte -->
-                                <div class="modal fade" id="editarReportesModal{{ $reporte['cod_reporte'] }}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-warning text-dark">
-                                                <h5 class="modal-title">Editar Reporte</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="editar-reporte-form" data-id="{{ $reporte['cod_reporte'] }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="form-group">
-                                                        <label for="cod_reporte">Código Reporte:</label>
-                                                        <input type="text" class="form-control" name="cod_reporte" value="{{ $reporte['cod_reporte'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="des_reporte">Descripción Reporte:</label>
-                                                        <input type="text" class="form-control" name="des_reporte" value="{{ $reporte['des_reporte'] }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="fecha_reporte">Fecha Reporte:</label>
-                                                        <input type="date" class="form-control" name="fecha_reporte" value="{{ $reporte['fecha_reporte'] }}" required>
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-warning btn-block">Guardar</button>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer text-center bg-dark text-white">
-                    <p>© Gestión de Reportes</p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NuevoReportesModal">
+                        <i class="fas fa-plus-circle"></i> Agregar Nuevo Reporte
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Modal de nuevo reporte -->
 <div class="modal fade" id="NuevoReportesModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -98,21 +65,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="nuevo-reporte-form">
+            <form id="nuevo-reporte-form">
+    @csrf
+    <div class="form-group">
+        <label for="des_reporte">Descripción:</label>
+        <input type="text" class="form-control" name="DES_REPORTE" required>
+    </div>
+    <div class="form-group">
+        <label for="fecha_reporte">Fecha Reporte:</label>
+        <input type="date" class="form-control" name="FECHA_REPORTE" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de edición -->
+<div class="modal fade" id="EditarReportesModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title">Editar Reporte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editar-reporte-form">
                     @csrf
+                    @method('PUT')
+                    <input type="hidden" name="COD_REPORTE" id="edit-cod-reporte">
                     <div class="form-group">
-                        <label for="cod_reporte">Código Reporte:</label>
-                        <input type="text" class="form-control" name="cod_reporte" required>
+                        <label for="edit-des-reporte">Descripción:</label>
+                        <input type="text" class="form-control" id="edit-des-reporte" name="DES_REPORTE" required>
                     </div>
                     <div class="form-group">
-                        <label for="des_reporte">Descripción:</label>
-                        <input type="text" class="form-control" name="des_reporte" required>
+                        <label for="edit-fecha-reporte">Fecha Reporte:</label>
+                        <input type="date" class="form-control" id="edit-fecha-reporte" name="FECHA_REPORTE" required>
                     </div>
-                    <div class="form-group">
-                        <label for="fecha_reporte">Fecha Reparación:</label>
-                        <input type="date" class="form-control" name="fecha_reporte" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    <button type="submit" class="btn btn-warning btn-block">Actualizar</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -125,97 +120,79 @@
 
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
-        $('#reportes-table').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar:",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
         // AJAX para agregar nuevo reporte
         $('#nuevo-reporte-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route("reportes.crear") }}',
+                url: '{{ route("reportes.store") }}',
                 method: 'POST',
                 data: formData,
                 success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: response.success,
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.error,
-                        });
-                    }
-                },
-                error: function(xhr) {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: xhr.responseText,
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: response.message,
+                    }).then(() => {
+                        location.reload();
                     });
-                }
-            });
-        });
-        // AJAX para editar reporte
-        $('.editar-reporte-form').on('submit', function(event) {
-            event.preventDefault();
-            var reporteId = $(this).data('id');
-            var formData = $(this).serialize();
-            $.ajax({
-                url: '{{ route("reportes.actualizar", "") }}/' + reporteId,
-                method: 'PUT',
-                data: formData,
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: response.success,
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.error,
-                        });
-                    }
                 },
                 error: function(xhr) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: xhr.responseText,
+                        text: xhr.responseJSON ? xhr.responseJSON.error : 'Error desconocido.',
                     });
                 }
             });
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('.edit-button').on('click', function() {
+            const codReporte = $(this).data('id');
+            const descripcion = $(this).data('descripcion');
+            const fecha = $(this).data('fecha');
+
+            $('#edit-cod-reporte').val(codReporte);
+            $('#edit-des-reporte').val(descripcion);
+            $('#edit-fecha-reporte').val(fecha);
+        });
+
+        // AJAX para editar reporte
+        $('#editar-reporte-form').on('submit', function(event) {
+            event.preventDefault();
+
+            const codReporte = $('#edit-cod-reporte').val();
+            const formData = $(this).serialize();
+
+            $.ajax({
+                url: `/reportes/${codReporte}`, // Ruta PUT
+                method: 'PUT',
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Reporte actualizado correctamente.',
+                    }).then(() => {
+                        location.reload();
+                    });
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON ? xhr.responseJSON.error : 'Error desconocido.',
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 @endsection

@@ -59,8 +59,8 @@ Route::put('/vehiculos/{id}', [VehiculosController::class, 'actualizar'])->name(
 //archivo utilizado para creacion de rutas para modulo reporte
 // Rutas para reportes 
 Route::get('/reportes', [ReportesController::class, 'listar'])->name('reportes.listar');
-Route::post('/reportes', [ReportesController::class, 'crear'])->name('reportes.crear');
-Route::put('/reportes/{id}', [ReportesController::class, 'actualizar'])->name('reportes.actualizar');
+Route::post('/reportes', [ReportesController::class, 'store'])->name('reportes.store');
+Route::put('/reportes/{id}', [ReportesController::class, 'update'])->name('reportes.update');
 
 
 // Rutas para reservaciones
