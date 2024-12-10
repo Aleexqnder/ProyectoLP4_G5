@@ -7,6 +7,30 @@
     <title>Login - MecaMasters</title>
     <link rel="stylesheet" href="{{ asset('bootstrap.css') }}" />
     <link href="{{ asset('build/assets/css/Login.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
+
+        <style>
+        body {
+            background-image: url("{{ asset('build/assets/img/FondoLogin.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            filter: brightness(50%); /* Ajusta este valor para cambiar el brillo */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -28,14 +52,22 @@
                 </div>
 
                 <!-- Password -->
-                <div class="form-group mb-4">
+                                   <div class="form-group mb-4">
                     <x-input-label for="contrasena" :value="__('Contraseña')" />
-
-                    <x-text-input id="contrasena" class="form-control"
-                    type="password"
-                    name="contrasena"
-                    required autocomplete="current-password" />
-
+                
+                    <div class="input-group">
+                        <x-text-input id="contrasena" class="form-control"
+                            type="password"
+                            name="contrasena"
+                            required autocomplete="current-password" />
+                
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                            </span>
+                        </div>
+                    </div>
+                
                     <x-input-error :messages="$errors->get('contrasena')" class="mt-2" />
                 </div>
 
@@ -97,6 +129,19 @@
             console.error('Error:', error);
             alert('Hubo un problema al intentar iniciar sesión.');
         });
+    });
+</script>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#contrasena');
+
+    togglePassword.addEventListener('click', function () {
+        // Cambiar el tipo de input entre 'password' y 'text'
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // Alternar el icono
+        this.classList.toggle('fa-eye-slash');
     });
 </script>
 </body>
